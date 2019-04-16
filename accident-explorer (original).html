@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>OVRDC Vehicle Crash Explorer</title>
+  <meta name="description" content="Crashes in the OVRDC Region from 2013-2016">
+  <meta name="keywords" content="mapboxglrtposafetymaps OVRDC Ohio Valley Regional Development Commission RTPO Transportation">
+  <meta name="author" content="OVRDC">
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!--link rel="icon" sizes="192x192" href="images/android-desktop.png"-->
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <!--meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+  <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png"-->
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <!--meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#3372DF"-->
+
+  <link rel="shortcut icon" href="https://www.ovrdc.org/apps/assets/images/favicon.png">
+  <!--meta content and open graph tags for social sharing see _includes/metal.html-->
+  <title>OVRDC Vehicle Crash Explorer | OVRDC</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ovrdc">
+  <meta name="twitter:creator" content="@ovrdc">
+  <meta name="twitter:title" content="OVRDC Vehicle Crash Explorer">
+  <meta name="twitter:description" content="Crashes in the OVRDC Region from 2013-2016">
+  <meta name="twitter:domain" content="www.ovrdc.org" />
+  <meta name="twitter:image" content="https://www.ovrdc.org/apps/assets/post-images/large/accident-explorer.png" />
+  <!--Open Graph meta data-->
+  <meta property="og:title" content="OVRDC Vehicle Crash Explorer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="" />
+  <meta property="og:image" content="https://www.ovrdc.org/apps/assets/post-images/landscape/accident-explorer.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image" content="https://www.ovrdc.org/apps/assets/post-images/large/accident-explorer.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1200" />
+  <meta property="og:description" content="Crashes in the OVRDC Region from 2013-2016" />
+  <meta property="og:url" content="https://www.ovrdc.org/apps/accident-explorer.html" />
+  <!--end meta and open graph-->
+
+  <!--Material Design-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css" />
+  <link rel="stylesheet" href="https://www.ovrdc.org/apps/assets/material/mdl-dashboard-styles.css">
+  <!--Type of mapping API to use for the post used instead of page.style as in the map layout-->
+    
+  <!-- mapboxgl -->
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feature.js/1.0.1/feature.min.js"></script>
+
+  
+  <script>mapboxgl.accessToken = 'pk.eyJ1Ijoib3ZyZGMiLCJhIjoiY2pjbTA2cmY3MG9naTJ3cndpYmJtbXRnNCJ9.CuHfwEKEsk2PqUJ_qFgrOQ'</script>
+  <link href='https://www.ovrdc.org/apps/assets/material/ovrdc-mapbox-mdl-dashboard-styles.css' rel='stylesheet' />
+  <link href='https://www.ovrdc.org/apps/assets/mapboxgl/openmaptiles/fa-cc.css' rel='stylesheet' />
+</head>
+<style>
+</style>
+<body>
+<!--Start Post Content-->
+
+<!--div class="demo-layout-transparent mdl-layout mdl-js-layout">
+  <header class="mdl-layout__header mdl-layout__header--transparent">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Vehicle Accident Statistics 2013-2015</span>
+      <div class="mdl-layout-spacer"></div>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+        <i class="material-icons">more_vert</i>
+      </button>
+      <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+        <li class="mdl-menu__item">About</li>
+        <li class="mdl-menu__item">Contact</li>
+        <li class="mdl-menu__item">Legal information</li>
+      </ul>
+    </div>
+  </header-->
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+  <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+    <header class="demo-drawer-header">
+      <div id="map-title"><h4>OVRDC Vehicle Crash Explorer</h4></div>
+      <div class="demo-avatar-dropdown">
+        <span class="mdl-color-text--grey-600">OVRDC Web Links</span>
+        <div class="mdl-layout-spacer"></div>
+        <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+          <i class="material-icons" role="presentation">arrow_drop_down</i>
+          <span class="visuallyhidden">Accounts</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+          <li class="mdl-menu__item"><a href="/">OVRDC Homepage</a></li>
+          <li class="mdl-menu__item"><a href="/gis/maps">OVRDC Map Gallery</a></li>
+        </ul>
+      </div>
+    </header>
+    <div style="height:2px;">
+      <div id="map-line--loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="height:2px;display:none;"></div>
+    </div>
+    <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+      <!--a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a-->
+      <div id="map-controls">
+        
+        <div id="map-controls--filters">
+          <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Map Layers</h6>
+          <ul>
+            <li>
+              <label id="crashToggle" class="mdl-card--border mdl-switch mdl-js-switch mdl-js-ripple-effect" for="crashTogglecheckbox">
+                <input type="checkbox" id="crashTogglecheckbox" class="mdl-switch__input" checked >
+                <span class="mdl-switch__label">Toggle Crashes</span>
+              </label>
+            </li>
+         <!--heatmap checkbox went here-->
+            <li>
+              <label id="counts" class="mdl-card--border mdl-switch mdl-js-switch mdl-js-ripple-effect" for="countscheckbox">
+                <input type="checkbox" id="countscheckbox" class="mdl-switch__input"  >
+                <span class="mdl-switch__label">Toggle Counts (14-16)</span>
+              </label>
+            </li>
+            <li>
+              <hr />
+            </li>
+          </ul>
+          <div id="map-controls--data"></div>
+          
+          <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Map Filters</h6>
+          <ul>
+            
+            
+            
+            
+            <li>
+              <label id="alcdrugs_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="alcdrugs">
+                <input type="checkbox" id="alcdrugs" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Alcohol/Drugs</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="animal_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="animal">
+                <input type="checkbox" id="animal" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Animal Involved</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="intersec_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="intersec">
+                <input type="checkbox" id="intersec" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Intersections</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="locowned_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="locowned">
+                <input type="checkbox" id="locowned" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Locally Owned Rds</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="bikeped_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="bikeped">
+                <input type="checkbox" id="bikeped" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Pedestrian Involved</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="rwdepart_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="rwdepart">
+                <input type="checkbox" id="rwdepart" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Roadway Departure</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="ovrspeed_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="ovrspeed">
+                <input type="checkbox" id="ovrspeed" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Speeding</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="teen_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="teen">
+                <input type="checkbox" id="teen" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Teen Involved</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="allinj_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="allinj">
+                <input type="checkbox" id="allinj" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">All Injury Crashes</span>
+              </label>
+            </li>
+          
+            
+            
+            <li>
+              <label id="fatinc_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="fatinc">
+                <input type="checkbox" id="fatinc" class="mdl-switch__input" value="1"  >
+                <span class="mdl-switch__label">Serious/Fatal Injury</span>
+              </label>
+            </li>
+          
+          </ul>
+          <div class="mdl-layout-spacer"></div>
+          <div id="map-controls--slider-title" class="map-control-title mdl-color-text--primary mdl-typography--text-uppercase mdl-typography--text-center">Adjust Opacity</div>
+          <input id="map-controls--slider" class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="20" tabindex="0">
+          <div id="map-controls--slider-tooltip" class="mdl-tooltip" data-mdl-for="map-controls--slider">Adjusts the transparency of the crash layer.</div>
+        </div><!--end map filters-->
+        
+        <div class="mdl-layout-spacer">&nbsp;</div>
+        <div id="demo-drawer--map-legend">
+          <h6 class="map-legend--title mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Crash Severity</h6>
+          <div id="map-legend--content" class="mdl-typography--text-center mdl-color-text--grey-600"></div>
+          <!--div class="mdl-card__actions"></div-->
+        </div>
+        
+      </div>
+      <div class="mdl-layout-spacer">&nbsp;</div>
+      <!-- picture button-->
+
+      <!--ABout this Map Card-->
+      <div class="map-drawer--footer">
+        <div class="mdl-typography--text-center mdl-color--blue-grey-900">
+          <a type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" href="https://docs.google.com/forms/d/e/1FAIpQLSd53cAsweLYkkr75KUpN6lHpsQcKbV9XoRNtJEsFsUHdVIVuw/viewform?entry.1286129613&entry.2022340261&entry.519867356=https://www.ovrdc.org/apps/accident-explorer.html" target="_blank"><i class="material-icons">message</i></a>
+          </a>
+          <button id="map-image-btn" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary">
+              <i class="material-icons">wallpaper</i>
+          </button>
+          <button id="map-share-btn" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary">
+              <i class="material-icons">share</i>
+          </button>
+          <button id="map-about-btn" type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary">
+              <i class="material-icons">info_outline</i>
+          </button>
+        </div>
+      </div>
+      <!-- Square Card Hidden-->
+      <div id="map-about--card" class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__menu">
+          <button class="map-about--card-close mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+        <!--div class="mdl-card__title mdl-card--expand">
+
+        </div-->
+        <div class="mdl-card__supporting-text">
+        <h1 class="mdl-card__title-text">About this Map</h1><br />
+          <div id="map-about--txt"><p>
+  This map represents all crashes between 2013 and 2016 for the OVRDC RTPO region. Crashes are grouped in three year periods and can be viewed for 2013-2015 or 2014-2016. The heatmap and counts are only for the most current crash years.
+</p> <p>
+  To view the actual crash locations click the "Toggle Crashes" button.
+</p> <p>
+  Circle color intensity (from light to deep pink) relate to number of serious/fatal injuries for each indiviual accident.
+</p> <p>
+  Zoom in to make all roads visible. Use the arrows on the zoom control or the right mouse button to rotate the map. Right click and drag to pitch the map.
+</p> <p>
+  For more details on how this map was made or the details behind the filters, please contact OVRDC using the message button on the bottom of the sidebar.
+</p></div>
+        </div>
+        <div class="map-about--card-close mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            Close
+          </a>
+        </div>
+      </div>
+      <!--a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a-->
+    </nav>
+  </div>
+  
+  <div id="map-layer--info-box" class="mdl-cell mdl-card mdl-shadow--3dp">
+    <div class="mdl-card__title">
+       <span class="mdl-card__title-text">Accident Details</span>
+    </div>
+    <div id="map-layer--info-txt" class="mdl-card__supporting-text mdl-typography--font-light mdl-typography--subhead"></div>
+    <div id="map-layer--info-footer" class="mdl-card__actions mdl-card--border" style="display:none;">
+    </div>
+    <div class="mdl-card__menu">
+      <button id="card01close" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  </div>
+  
+  <main id="mdl_main" class="mdl-layout__content mdl-color--grey-100">
+    <!--div class="mdl-grid demo-content"></div-->
+    <div>
+      <div id="map-snackbar" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+      </div>
+    </div>
+    <div id="map">
+      <div id="map-loading">
+        <div class="mdl-spinner mdl-js-spinner is-active"></div>
+      </div>
+      <!--move to map script?-->
+      
+      <div id="map-baselayers--container">
+        <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="map-baselayers">
+          <i class="material-icons">layers</i>
+        </button>
+        <ul id="map-baselayers--menu" class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="map-baselayers">
+          <li id="osm-bright" class="baselayer mdl-menu__item">Streets Basic</li>
+          <li id="positron" class="baselayer mdl-menu__item">Streets Light</li>
+          <li id="dark-matter" class="baselayer mdl-menu__item">Streets Dark</li>
+          <li id="mapbox-satellite-streets" class="baselayer mdl-menu__item">Satellite</li>
+        </ul>
+      </div>
+      <!-- Attribution move to an include? -->
+      <!--div id="attribution-container">
+        <span id="attribution" class="mdl-tooltip--left"><a href="http://www.ovrdc.org/gis/">© OVRDC</a>&nbsp;<a href="http://www.openstreetmap.org/about/" target="_blank">© OpenStreetMap</a> | Powered by <a href="https://www.mapbox.com/mapbox-gl-js/api/" target="_blank">Mapbox GL</a></span>
+        <button id="attribution-button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored mdl-js-ripple-effect">
+          <i class="material-icons">info</i>
+        </button>
+      </div-->
+      <!-- end attribution-->
+      <div id="map-legend" class="mdl-color--blue-grey-900 mdl-color-text-blue-grey-50" style="display:none;"></div>
+    </div>
+    <!--mapillary viewer-->
+    <div id="mly"></div>
+  </main>
+  <div id="map-about-modal" class="ovrdc-modal">
+    <div class="ovrdc-modal-inner">
+      <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+          <h2 class="mdl-card__title-text">OVRDC Vehicle Crash Explorer</h2>
+        </div>
+        <div class="mdl-card__supporting-text"><p>
+  This map represents all crashes between 2013 and 2016 for the OVRDC RTPO region. Crashes are grouped in three year periods and can be viewed for 2013-2015 or 2014-2016. The heatmap and counts are only for the most current crash years.
+</p> <p>
+  To view the actual crash locations click the "Toggle Crashes" button.
+</p> <p>
+  Circle color intensity (from light to deep pink) relate to number of serious/fatal injuries for each indiviual accident.
+</p> <p>
+  Zoom in to make all roads visible. Use the arrows on the zoom control or the right mouse button to rotate the map. Right click and drag to pitch the map.
+</p> <p>
+  For more details on how this map was made or the details behind the filters, please contact OVRDC using the message button on the bottom of the sidebar.
+</p></div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect ovrdc-modal--close">
+            Close
+          </a>
+        </div>
+        <div class="mdl-card__menu">
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect ovrdc-modal--close">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="map-image-modal" class="ovrdc-modal">
+    <div class="ovrdc-modal-inner">
+      <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <span id="map-image"></span>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <button id="map-image-href" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Download Placeholder</button>
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect ovrdc-modal--close" style="float:right;">
+            Close
+          </a>
+        </div>
+        <div class="mdl-card__menu">
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect ovrdc-modal--close">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="map-share-modal" class="ovrdc-modal">
+    <div class="ovrdc-modal-inner">
+      <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-card--expand">
+          <h2 class="mdl-card__title-text">Share this Map</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <div class="map-share-buttons">
+            <a href="//www.facebook.com/sharer.php?u=https://www.ovrdc.org/apps/accident-explorer.html&amp;t=OVRDC%20Vehicle%20Crash%20Explorer"
+            target="_blank" class="mdl-button mdl-js-button mdl-button--raised" style="background-color:#4867b4;">
+              facebook
+            </a>
+            <a class="mdl-button mdl-js-button mdl-button--raised"  style="background-color:#5db4f7;" href="//twitter.com/intent/tweet?status=OVRDC%20Vehicle%20Crash%20Explorer https://www.ovrdc.org/apps/accident-explorer.html"
+            target="_blank">Twitter</a>
+            <a class="mdl-button mdl-js-button mdl-button--raised" style="background-color:#b50015;" href="//www.pinterest.com/pin/create/button/?url=https://www.ovrdc.org/apps/accident-explorer.html&amp;media=https://www.ovrdc.org/apps/assets/post-images/large/accident-explorer.png&amp;description=OVRDC Vehicle Crash Explorer"
+            target="_blank">Pinterest</a>
+          </div>
+          <div>
+            <h5>Embed Code</h5>
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield map-share-embed" style="padding:0;border:1px solid rgba(0,0,0,.12);padding:10px;">
+                <input class="mdl-textfield__input" style="border-bottom:none;type="text" value="<iframe src='https://www.ovrdc.org/apps/accident-explorer.html' width='800px' height='600px' frameborder=none></iframe>" >
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect ovrdc-modal--close">
+            Close
+          </a>
+        </div>
+        <div class="mdl-card__menu">
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect ovrdc-modal--close">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+if ( !mapboxgl.supported()) {
+    alert('Please upgrade to a modern browser. Your current browser does not support the advanced features of of this map. OVRDC Recommends Chrome.');
+} else {
+  var getQuery = function(q) {
+  if (q) {
+    var params = {},
+      queries, temp, i, l;
+    /* Split into key/value pairs*/
+    queries = q.split("&");
+    /* Convert the array of strings into an object*/
+    for (i = 0, l = queries.length; i < l; i++) {
+      temp = queries[i].split('=');
+      params[temp[0]] = temp[1];
+    }
+    return params;
+  }
+};
+var query = getQuery((window.location.search).substring(1));
+if (query) {
+  var debug = query.debug;
+}else{var debug = false}
+if(debug === "true"){}else{
+  if(!window.console) window.console = {};
+  var methods = ["log", "debug", "warn", "info"];
+  for(var i=0;i<methods.length;i++){
+    console[methods[i]] = function(){};
+  }
+}
+  $("#demo-drawer--map-legend").hide();
+  /* create radios for old and new crashes */
+  var currentCrashLayer = "crashes1517";
+  var crashesLayerOn = false;
+  function mdlRadioCreate(mdlRadioId, mdlRadioValue, mdlRadioChecked, mdlRadioLabel, elId, disabled) {
+    var mdlRadio  = document.createElement('label');
+    mdlRadio.className = "mdl-radio mdl-js-radio mdl-js-ripple-effect";
+    mdlRadio.for = mdlRadioId;
+    mdlRadio.id = mdlRadioId + "Label"
+    var mdlRadioInput = document.createElement('input');
+    mdlRadioInput.type = 'radio';
+    mdlRadioInput.id = mdlRadioId;
+    mdlRadioInput.className = "mdl-radio__button"
+    mdlRadioInput.name = "options"
+    mdlRadioInput.value = mdlRadioValue
+    mdlRadioInput.checked = mdlRadioChecked
+    mdlRadioInput.disabled = disabled;
+    mdlRadioInput.addEventListener('click', function(e) {
+      var mdlRadioClickedId = e.target.id;
+      console.log(mdlRadioClickedId);
+      console.log(map.getLayoutProperty(mdlRadioClickedId, 'visibility'));
+      if (map.getLayoutProperty(mdlRadioClickedId, 'visibility') === 'none') {
+        map.setLayoutProperty(mdlRadioClickedId, 'visibility', 'visible');
+        if (mdlRadioClickedId === 'crashes1416') {
+          map.setLayoutProperty('crashes1315', 'visibility', 'none');
+          map.setLayoutProperty('crashes1517', 'visibility', 'none')
+        }
+        if (mdlRadioClickedId === 'crashes1315') {
+          map.setLayoutProperty('crashes1416', 'visibility', 'none');
+          map.setLayoutProperty('crashes1517', 'visibility', 'none')
+        }
+        if (mdlRadioClickedId === 'crashes1517') {
+          map.setLayoutProperty('crashes1416', 'visibility', 'none');
+          map.setLayoutProperty('crashes1315', 'visibility', 'none')
+        }
+        currentCrashLayer = mdlRadioClickedId;
+      }
+    });
+    mdlRadio.appendChild(mdlRadioInput);
+    var mdlRadioLabelEl = document.createElement('span');
+    mdlRadioLabel.className = "mdl-checkbox__label";
+    mdlRadioLabelEl.innerHTML = mdlRadioLabel
+    mdlRadio.appendChild(mdlRadioLabelEl);
+  //  componentHandler.upgradeElement(mdlRadio);
+    document.getElementById(elId).appendChild(mdlRadio);
+  }
+  document.getElementById("map-controls--data").innerHTML = '<h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Crash Years</h6>';
+  mdlRadioCreate("crashes1517", "1", true, "2015-2017 Crashes", "map-controls--data", false);
+  mdlRadioCreate("crashes1416", "2", false, "2014-2016 Crashes", "map-controls--data", false);
+  mdlRadioCreate("crashes1315", "3", false, "2013-2015 Crashes", "map-controls--data", false);
+  var mdlRadioHr = document.createElement('hr');
+  document.getElementById("map-controls--data").appendChild(mdlRadioHr);
+  /*  <span class="mdl-radio__label">First</span>
+  </label>*/
+  /* global variables*/
+  var darkcolors = [
+    [0, "rgb(255, 210, 220)"],
+    [1, "pink"],
+    [3, "deeppink"],
+    [5, "MEDIUMVIOLETRED"]
+  ];
+  var lightcolors = [
+    [0, "#f5aeae"],
+    [1, "lightcoral"],
+    [3, "crimson"],
+    [5, "firebrick"]
+  ];
+  var colors = darkcolors;
+  var currentOpacity = 0.2;
+  var firstRun = 1;
+  var filterCount = 0;
+    /*var mapmargin = 80;
+  $('#map').css("height", ($(window).height() - mapmargin));*/
+  var view = {center: [-82.9028, 39.0813], zoom: 8.61, bearing: 0, pitch: 0};
+  //var view = {center: [-82.083,39.647], zoom: 7.61, bearing: 0, pitch: 0};
+  var map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/mapbox/dark-v9',
+      attributionControl: true,
+      pitch: 0, // pitch in degrees
+      bearing: 0, // bearing in degrees
+      //center: [-82.083,39.647],
+      center: [-82.9028, 39.0813], // starting position
+      zoom: 8.61,
+      //zoom: 8.61, // starting zoom,
+      //debug: true,
+      hash: true,
+      maxZoom: 16.9,
+      minZoom: 9,
+      maxBounds: [[-86.61, 36.63], [-75.89, 41.94]],
+      preserveDrawingBuffer: true
+  });
+  var nav = new mapboxgl.NavigationControl({position: 'top-right'}); // position is optional
+  map.addControl(nav);
+  //map.flyTo(view);
+  var crashes1315, crashesHighlight, fs, feature, crashPoints, heatmapLayer;
+  var crashLayerOn = 0,
+  countLayerOn = 0;
+  /***************/
+  /*HEATMAP*/
+  /***************/
+  var countsVisibility = 'none';
+  var heatmapOpacity = 0.5;
+  var cploaded = 0,
+  heatmapLayersAdded = 0;
+  var heat = false;
+  var counts = false;
+  var heatSwitch = document.querySelector("#heatmap");
+  var countSwitch = document.querySelector("#counts");
+  var crashSwitch = document.querySelector("#counts");
+  var crashes1416Switch = document.querySelector("#crashes1416Label");
+  var crashes1315Switch = document.querySelector("#crashes1315Label");
+  var crashes1517Switch = document.querySelector("#crashes1517Label");
+  function addHeatmapData() {
+    $("#map-loading").show();
+    /*attempt at heatmap with csv file converted to geojson then run through supercluster*/
+    Papa.parse('https://www.ovrdc.org/apps/assets/data/crashes/crashes_csv_2015_2017.csv', {
+      download: true,
+      header: true,
+      complete: function(csv) {
+        csv.data.map(function(data, n) {
+          data["POINT_X"] = Number(data["POINT_X"]);
+          data["POINT_Y"] = Number(data["POINT_Y"]);
+        });
+        console.log('csv data loaded');
+        crashPoints = GeoJSON.parse(csv.data, {Point: ['POINT_Y', 'POINT_X']});
+        console.log('converted to geojson')
+        console.log(crashPoints);
+        cploaded = 1;
+        addHeatmapSource();
+      }
+    });
+  }
+  function addHeatmapSource() {
+    console.log('checking if data is already loaded')
+    if (cploaded === 0) {
+      addHeatmapData();
+      return false;
+    }
+    if (cploaded === 1) {
+      /*hexbinheatmap FAIL*/
+      /*$("#map-loading").show();
+      var heatmap = new HexgridHeatmap(map, "hexgrid-heatmap", "airport_label");
+      map.setPaintProperty("hexgrid-heatmap", "fill-opacity", 0.8);
+      heatmap.setIntensity(4);
+      heatmap.setSpread(1);
+      heatmap.setCellDensity(1);
+      heatmap.setData(crashPoints);
+      heatmap.update();*/
+      /**/
+      console.log('adding heatmap');
+      if(!map.getSource('heatmap-source')) {
+        map.addSource("heatmap-source", {
+          type: "geojson",
+           data: crashPoints,
+           cluster: true,
+           clusterMaxZoom: 16, // Max zoom to cluster points on
+           clusterRadius: 25 // Radius of each cluster when clustering points (defaults to 50)*/
+        });
+        map.addSource("test-heatmap-source", {
+          type: "geojson",
+           data: crashPoints,
+        });
+        heatmapLayer = {
+          id: "test-heatmap-layer",
+          type: "heatmap",
+          source: "test-heatmap-source",
+          paint: {
+            "heatmap-weight": 0.1,
+            "heatmap-opacity": heatmapOpacity,
+            "heatmap-radius": {
+              stops: [
+                [0, 1],
+                [15, 45]
+              ]
+            },
+            "heatmap-intensity": {
+              stops: [
+                [0,0.08],
+                [15,1]
+              ]
+            }
+          }
+        };
+      }
+      map.addLayer(heatmapLayer);
+      heat = true;
+      if (!$('#heatmap').hasClass('is-checked') && heatmapOpacity === 0.5) {
+        console.log($('#heatmap').hasClass('is-checked'));
+        heatSwitch.MaterialSwitch.on();
+      }
+      if ($('#counts').hasClass('is-checked') && countsVisibility === 'visible') {
+        countSwitch.MaterialSwitch.on();
+      }
+    }
+    addCountLayers()
+  }
+  function addCountLayers() {
+    console.log(colors);
+    map.addLayer({
+      id: "count-layer",
+      type: "circle",
+      source: "heatmap-source",
+      filter: [">", "point_count", 2],
+      paint: {
+        "circle-color": {
+          property: "point_count",
+          type: "exponential",
+          stops: [
+              [0, colors[1][1]],
+              [500, colors[3][1]]
+          ]
+        },
+        "circle-radius": {
+          property: "point_count",
+          type: "exponential",
+          stops: [
+              [0, 8],
+              [10, 12],
+              [500, 60]
+          ]
+        },
+        "circle-blur": 0.1,
+        "circle-opacity": 0.7
+      },
+      layout: {
+        visibility: countsVisibility
+      },
+    });
+    map.addLayer({
+      id: "count-label",
+      type: "symbol",
+      source: "heatmap-source",
+      filter: [">", "point_count", 2],
+      layout: {
+        "text-field": "{point_count_abbreviated}",
+        "text-font": [
+          "Open Sans Italic"
+        ],
+        "text-size": 12,
+        visibility: countsVisibility
+      }
+    });
+    heatmapLayersAdded = 1;
+    $("#map-loading").hide();
+  }
+  if (counts === true) {
+    map.setPaintProperty('count-label', 'visibility', countsVisibility);
+    map.setPaintProperty('count-layer', 'visibility', countsVisibility);
+  }
+  $("#countscheckbox").change(function() {
+    if ($('#counts').hasClass('is-checked')) {
+      if (cploaded == 0) {
+        alert('Cluster data is still loading or has encountered an error!');
+        return false
+      }
+      counts = false;
+      console.log('counts checked');
+      countsVisibility = 'none';
+      map.setLayoutProperty('count-layer', 'visibility', 'none');
+      map.setLayoutProperty('count-label', 'visibility', 'none');
+    }else{
+      counts = true;
+      countsVisibility = 'visible';
+      map.setLayoutProperty('count-layer', 'visibility', 'visible');
+      map.setLayoutProperty('count-label', 'visibility', 'visible');
+    }
+  });
+  $("#heatmapcheckbox").change(function() {
+    if ($('#heatmap').hasClass('is-checked')) {
+      if (cploaded == 0) {
+        alert('Cluster data is still loading or has encountered an error!');
+        return false
+      }
+      heat = false;
+      console.log('heatmap checked');
+      heatmapOpacity = 0;
+      map.setPaintProperty('test-heatmap-layer', 'heatmap-opacity', heatmapOpacity);
+    }else{
+      heat = true;
+      heatmapOpacity = 0.5;
+      map.setPaintProperty('test-heatmap-layer', 'heatmap-opacity', heatmapOpacity);
+    }
+  });
+  $("#crashTogglecheckbox").change(function() {
+    if ($('#crashToggle').hasClass('is-checked')) {
+      map.setLayoutProperty(currentCrashLayer, 'visibility', 'none');
+      crashes1416Switch.MaterialRadio.disable();
+      crashes1315Switch.MaterialRadio.disable();
+      crashes1517Switch.MaterialRadio.disable();
+      $("#map-controls--data").css("color","#bdbdbd");
+      $('.map-controls--filters-toggle').each(function() {
+        $(this)[0].MaterialSwitch.disable();
+      });
+      $("#demo-drawer--map-legend").hide();
+      $("#map-controls--slider").attr('disabled', true);
+      crashesLayerOn = false;
+    }else{
+      crashesLayerOn = true;
+      map.setLayoutProperty(currentCrashLayer, 'visibility', 'visible');
+      crashes1416Switch.MaterialRadio.enable();
+      crashes1315Switch.MaterialRadio.enable();
+      crashes1517Switch.MaterialRadio.enable();
+      $("#map-controls--data").css("color","#eceff1");
+      $('.map-controls--filters-toggle').each(function() {
+        $(this)[0].MaterialSwitch.enable();
+      });
+      $("#map-controls--slider").attr('disabled', false);
+      $("#demo-drawer--map-legend").show();
+    }
+  });
+  /***************/
+  /*END HEATMAP*/
+  /***************/
+  /*fired on initial map load*/
+  map.on('load', function () {
+    console.log(firstRun, 'map.load');
+/*    crashes1416Switch.MaterialRadio.disable();
+    crashes1315Switch.MaterialRadio.disable();
+    crashes1517Switch.MaterialRadio.disable();
+    $("#map-controls--data").css("color","#bdbdbd");
+    /*$('.map-controls--filters-toggle').each(function() {
+      $(this)[0].MaterialSwitch.disable();
+    });
+    $("#map-controls--slider").attr('disabled', true);*/
+    buildMap();
+    firstRun = 0;
+    console.log(firstRun, 'map.load');
+  });
+  //var attribution = new mapboxgl.AttributionControl({position: 'bottom-right'});
+  //attribution.addTo(map);
+  function buildMap() {
+    var getCurrentStyle = [map.getStyle()];
+    var str = getCurrentStyle[0].name;
+    str = str.replace(/\s+/g, '-').toLowerCase();
+    //console.log(str);
+    if (str == 'mapbox-satellite-streets' || str == 'dark-matter') {
+      colors = [];
+      colors = darkcolors;
+    }else{
+      colors = [];
+      colors = lightcolors;
+    }
+    //console.log(colors);
+    if(!map.getSource('counties')) {
+      map.addSource('counties', {
+        "type": "geojson",
+        "data": "https://www.ovrdc.org/apps/assets/data/administrative/esri_counties_simple.geojson",
+      });
+      map.addSource('twps', {
+        "type": "geojson",
+        "data": "https://www.ovrdc.org/apps/assets/data/administrative/ovrdc-townships.geojson",
+      });
+      map.addSource('1315', {
+        "type": "vector",
+        "url": "mapbox://ovrdc.53wxct9q"
+      });
+      map.addSource('1416', {
+        "type": "vector",
+        "url": "mapbox://ovrdc.c3wumg1m"
+      });
+      map.addSource('1517', {
+        "type": "vector",
+        "url": "mapbox://ovrdc.85fsk8no"
+      });
+    }
+    map.addLayer({
+      'id': 'counties',
+      'type': 'line',
+      'source': 'counties',
+      //'source-layer': 'rtpo',
+      "layout": {
+          "line-join": "round",
+          "line-cap": "round"
+      },
+      'paint': {
+          'line-color': '#77828b',
+          'line-width': 3.5,
+          //"line-dasharray": [10,2],
+          "line-opacity": 0.2
+      }
+    });
+    map.addLayer({
+      'id': 'twps',
+      'type': 'line',
+      'source': 'twps',
+      //'source-layer': 'rtpo',
+      "layout": {
+          "line-join": "round",
+          "line-cap": "round"
+      },
+      'paint': {
+          'line-color': '#77828b',
+          'line-width': {
+            'stops': [
+              [9.4, 0],
+              [9.5, 2]
+            ]
+          },
+          "line-dasharray": [4,2],
+          "line-opacity": 0.2
+      }
+    });
+    var crashStyle = {
+      "circle-color": {
+        "property": "fatinc",
+        "stops": colors
+      },
+      "circle-opacity": currentOpacity,
+      //"circle-blur": 0.2,
+      'circle-stroke-color': 'white',
+      'circle-stroke-width': 1,
+      'circle-stroke-opacity': currentOpacity,
+      "circle-radius": {
+          "base": 1.2,
+          "stops": [
+            [0, 0],
+            [8, 4],
+            [20, 30]
+          ]
+      }
+    };
+    crashes1315 = {
+        "id": "crashes1315",
+        "type": "circle",
+        "source": "1315",
+        "source-layer": "allcrashes13_15_v5",
+        "layout": {
+          "visibility": 'none'
+        },
+        "paint": crashStyle,
+        "filter": [">=", "fatinc", 0],
+        "interactive": true
+    };
+    crashes1416 = {
+      "id": "crashes1416",
+      "type": "circle",
+      "source": "1416",
+      "source-layer": "crashes_1416",
+      "layout": {
+        "visibility": 'none'
+      },
+      "paint": crashStyle,
+      "filter": [">=", "fatinc", 0],
+      "interactive": true
+    }
+    var crashes1517 = {
+      "id": "crashes1517",
+      "type": "circle",
+      "source": "1517",
+      "source-layer": "crashes_web_2015_2017-3qtsgx",
+      "layout": {
+        "visibility": 'visible'
+      },
+      "paint": crashStyle,
+      "filter": [">=", "allinj", 0],
+      "interactive": true
+    }
+    map.addLayer(crashes1517);
+    map.addLayer(crashes1416);
+    map.addLayer(crashes1315);
+    if (crashesLayerOn === true ) {
+      map.setLayoutProperty(currentCrashLayer, 'visibility', 'visible');
+    }
+    var layers = [
+      [150, 'firebrick', 40],
+      [20, 'orange', 10],
+      [0, 'green', 5]
+    ];
+    map.on("mousemove", function(e) {
+      if (!map.getLayer(currentCrashLayer)){return false}else{
+        var features = map.queryRenderedFeatures(e.point, { layers: [currentCrashLayer] });
+        //console.log(features);
+        if (features.length) {
+          $('html,body,canvas').css('cursor','pointer');
+        } else {
+          $('html,body,canvas').css('cursor','auto');
+        }
+      }
+    });
+    map.on('click', function (e) {
+      if (typeof map.getLayer('crashesHighlight') != "undefined") {
+        map.removeLayer('crashesHighlight')
+        map.removeSource('highlightSource');
+      }
+      console.log('click');
+      if (!map.getLayer(currentCrashLayer)){console.log('no crashes');return false}else{
+        //map.setFilter("crashesHighlight", ["==", "OBJECTID", ""]);
+        $("#map-layer--info-box").hide();
+        fs = 0;
+        feature = [];
+        feature = map.queryRenderedFeatures(e.point, {layers: [currentCrashLayer]});
+        console.log(feature);
+        var d1, d2, d3;
+        if (feature.length > 40) {
+          //map.flyTo({center: e.lngLat, zoom: 16});
+          $("#map-layer--info-txt").html('More than ' + feature.length + ' crashes found.<br /><br />Zoom in further to be more precise.');
+          $("#map-layer--info-box").show();
+          return false
+        }
+        if (feature.length > 0 && feature.length < 41) {
+          map.addSource('highlightSource', {
+            type: "geojson",
+            data: feature[0].toJSON()
+          });
+          crashesHighlight = {
+            "id": "crashesHighlight",
+            "type": "circle",
+            "source": "highlightSource",
+            "layout": {
+              "visibility": "visible"
+            },
+            "paint": {
+              "circle-color": "goldenrod",
+              "circle-opacity": 0.9,
+              "circle-blur": 0,
+              "circle-radius": {
+                  "base": 1.2,
+                  "stops": [
+                    [0, 0],
+                    [8, 7],
+                    [20, 40]
+                  ]
+              }
+            },
+            //"filter": ["==", "OBJECTID", feature[0].properties.OBJECTID],
+            "interactive": true
+          };
+          map.addLayer(crashesHighlight);
+          console.log(e.point.x)
+          var flyZoom = map.getZoom();
+          map.flyTo({center: feature[0].geometry.coordinates, zoom: flyZoom});
+          var length = feature.length;
+          //map.setFilter("crashesHighlight", ["==", "OBJECTID", feature[0].properties.OBJECTID]);
+          $("#map-layer--info-txt").html("");
+          if (feature.length > 1) {
+            var message = "<span style='color:firebrick;'>Multiple (" + feature.length + ") crashes found</span>";
+            var buttons = '<button id="prev" style="float:left;display:none;" class="mdl-button mdl-js-button mdl-button--primary">Previous</button><button id="next" style="float:right;display:block;" class="mdl-button mdl-js-button mdl-button--primary">Next</button></div>';
+            //mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect
+          } else {
+            var message = "";
+            var buttons = "";
+          }
+          $("#map-layer--info-txt").append(message);
+          for (var i=0; i < feature.length; i++) {
+            if (i > 0) {d1 = "none"; d2 = "block"; }else{d1="block";d2="none;"}
+            if ((i + 2) > feature.length) {d3 = "none;"}else{d3="block;"}
+            var popup = '<div class="info' + i + '" style="display:'+ d1 + ';"><table class="mdl-data-table mdl-js-data-table"><tbody>';
+            var p = feature[i].properties;
+            console.log(currentCrashLayer);
+            if (currentCrashLayer != 'crashes1315') {
+              var fieldNames = ["On_StNme","LIGHT_COND_PRIMARY_CD","CRASH_TYPE_CD", "WEATHER_COND_CD", "ROAD_COND_PRIMARY_CD", "ODOT_CRASH_LOCATION_CD", "U1_CONT_CIR_PRIMARY_CD", "U1_TYPE_OF_UNIT_CD", "ROAD_CONTOUR_CD", "fatinc"];
+            }else{
+              var fieldNames = ["On_StNme", "LightCond1","CrashType", "Weather", "RdCond_1", "Location", "U1ContCir1", "U1BodyType", "AnimalF", "RdContour", "fatinc"];
+            }
+            console.log(fieldNames);
+            var fieldAlias = ["Road", "Lighting Condition", "Crash Type", "Weather", "Road Conditions", "Location", "Factors", "Vehicle Type", "Road Contour", "Serious Injuries"];
+            for (var z=0; z < fieldAlias.length; z++) {
+              //console.log(feature);
+              if (feature[i].properties[fieldNames[z]]) {
+                var featureProperties = feature[i].properties[fieldNames[z]];
+              }else{
+                var featureProperties = "";
+              }
+              //console.log(featureProperties);
+              if (featureProperties.length > 20) {
+                featureProperties = featureProperties.substring(0,17) + '...';
+              }
+              popup += '<tr style="height:auto;"><td><strong>' + fieldAlias[z] + '</strong></td><td>' + featureProperties + '</td></tr>'
+            }
+            var finalpopup = popup + '<br /></tbody></table><br /><div>';
+            $("#map-layer--info-txt").append(finalpopup);
+          }
+          $("#map-layer--info-txt").append(buttons);
+          $("#map-layer--info-box").fadeIn();
+        }
+        $("#next").unbind().click(function(event){
+          event.preventDefault();
+          //console.log(fs);
+          $(".info" + fs).hide();
+          if (fs < feature.length) {
+            fs = fs+1;
+            $(".info" + fs).show();
+            var newFeatureData = feature[fs].toJSON();
+            map.getSource('highlightSource').setData(newFeatureData);
+            console.log('showing properties for feature[' + fs + ']');
+            //map.setFilter("crashesHighlight", ["==", "OBJECTID", feature[fs].properties.OBJECTID]);
+          }
+          if ((fs + 1) == feature.length) {
+            $("#next").hide();
+            $("#prev").show();
+          }
+        });
+        $("#prev").unbind().click(function(event){
+          event.preventDefault();
+          //console.log(fs);
+          $(".info" + fs).hide();
+          if (fs < feature.length) {
+            fs = fs-1;
+            $(".info" + fs).show();
+            var newFeatureData = feature[fs].toJSON();
+            map.getSource('highlightSource').setData(newFeatureData);
+            console.log('showing properties for feature[' + fs + ']');
+            //map.setFilter("crashesHighlight", ["==", "OBJECTID", feature[fs].properties.OBJECTID]);
+          }
+          if (fs == 0) {
+            $("#prev").hide();
+            $("#next").show();
+          }
+        });
+      }
+    });
+    var closecard = document.getElementById('card01close');
+    closecard.addEventListener('click', function() {
+      $("#map-layer--info-box").fadeOut();
+      map.setLayoutProperty('crashesHighlight', 'visibility', 'none');
+    });
+    /*<!-- Slider with Starting Value -->
+    <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="60" tabindex="0">*/
+    //Create slider element, listen for changes and adjust opacity on map - see
+  /*
+    var opacitySliderTitle = document.createElement("div");
+      opacitySliderTitle.innerHTML = "<button class='mdl-button mdl-button--primary'>Adjust Crash Opacity</button>";
+    var opacitySlider = document.createElement("INPUT");
+      opacitySlider.type = "range";
+      opacitySlider.min = "0";
+      opacitySlider.max = "100";
+      opacitySlider.value = "60";
+      opacitySlider.tabindex="0";
+      opacitySlider.id = "slider";
+      opacitySlider.setAttribute('class', 'mdl-slider mdl-js-slider');
+      opacitySliderTitle.appendChild(opacitySlider);
+      document.getElementById('map-controls').appendChild(opacitySliderTitle);*/
+    var slider = document.getElementById('map-controls--slider');
+    //console.log(slider);
+    //console.log(map.getPaintProperty('crashes', 'circle-opacity'));
+    function changeOpacity(e) {
+      // Adjust the layers opacity. layer here is arbitrary - this could
+      // be another layer name found in your style or a custom layer
+      // added on the fly using `addSource`.
+      currentOpacity = (parseInt(e.target.value, 10) / 100);
+      //console.log(currentOpacity);
+      map.setPaintProperty("crashes1315", 'circle-opacity', currentOpacity);
+      map.setPaintProperty("crashes1416", 'circle-opacity', currentOpacity);
+      map.setPaintProperty("crashes1517", 'circle-opacity', currentOpacity);
+      map.setPaintProperty("crashes1315", 'circle-stroke-opacity', currentOpacity);
+      map.setPaintProperty("crashes1416", 'circle-stroke-opacity', currentOpacity);
+      map.setPaintProperty("crashes1517", 'circle-stroke-opacity', currentOpacity);
+      var tooltip = document.getElementById('map-controls--slider-tooltip');
+      tooltip.innerHTML = "Adjusts the transparency of the crash layer.&nbsp;" + e.target.value + '%';
+    }
+    slider.addEventListener('input', function(e) {
+      changeOpacity(e)
+    });
+    slider.addEventListener('change', function(e) {
+      changeOpacity(e)
+    });
+    //End Slider
+    function filterMap() {
+      flying = false;
+      //console.log('filtering map')
+      //console.log($("#crashes1416Label").hasClass("is-disabled"));
+      if ($("#crashes1416Label").hasClass("is-disabled")) {
+        var notification = document.querySelector('.mdl-js-snackbar');
+        notification.MaterialSnackbar.showSnackbar(
+          {
+            message: 'You must first turn on the crashes using "Toggle Crashes" to use the filters.'
+          }
+        );
+        return false
+      }
+      if (filterCount == 0) {
+        var notification = document.querySelector('.mdl-js-snackbar');
+        notification.MaterialSnackbar.showSnackbar(
+          {
+            message: 'Note: Filters do not affect the Heatmap or Crash Counts'
+          }
+        );
+      }
+      filterCount = 1;
+      var values = [];
+      var fields = [];
+      $('.map-controls--filters-toggle input:checked').each(function() {
+          values.push($(this).attr('value'));
+          fields.push($(this).attr('id'));
+      });
+      //console.log(fields);
+      //console.log(values);
+      var filter = ['all'];
+      for (var i = 0; i < values.length; i++) {
+        if (fields[i] == "teen" && currentCrashLayer === "crashes1315") {
+          //console.log(fields[i]);
+          var k = ['in', "U1Age", 15, 16, 17, 18, 19];
+        } else {
+          var k = ['>=', fields[i], Number(values[i])];
+        }
+        filter.push(k)
+      }
+      //console.log(filter);
+      map.setFilter("crashes1315", filter);
+      map.setFilter("crashes1416", filter);
+      map.setFilter("crashes1517", filter);
+    }
+    $(".map-controls--filters-toggle").change(function() {
+      filterMap();
+    });
+    //reset toggles on page load    $('.mdl-switch input:checked').each(function() {
+    function resetToggles() {
+      $('.map-controls--filters-toggle input:checked').each(function() {
+        $(this).parent().removeClass('is-checked');
+        $(this).prop('checked', false);
+        //console.log($(this))//.prop('checked', false);
+      });
+    }
+    //resetToggles();
+    //home button
+    var flying = false;
+    function resetMap() {
+      map.setPaintProperty("crashes1315", 'circle-opacity', 0.2);
+      map.setPaintProperty("crashes1416", 'circle-opacity', 0.2);
+      map.setPaintProperty("crashes1517", 'circle-opacity', 0.2);
+      map.setPaintProperty("crashes1315", 'circle-stroke-opacity', 0.2);
+      map.setPaintProperty("crashes1416", 'circle-stroke-opacity', 0.2);
+      map.setPaintProperty("crashes1517", 'circle-stroke-opacity', 0.2);
+      slider.MaterialSlider.change(20)
+      resetToggles();
+      map.flyTo(view);
+      map.on('flystart', function() {
+        flying = true;
+      });
+      map.on('flyend', filterMap());
+      setTimeout(function() {
+        if (flying === true) {
+          filterMap()
+        }
+      }, 2000);
+    }
+    /*$("#map-controls--reset").click(function() {
+      resetMap();
+    });*/
+    var legend = "";
+    for (var i=0; i < colors.length; i++) {
+      legend += '<svg width="44" height="50"><circle cx="22" cy="25" r="10" fill="' + colors[i][1] + '" /></svg>'
+    }
+    $("#map-legend--content").html(legend + "<br /><span style='float:left;'>Less Severe</span><span style='float:right;'>More Severe</span><br />");
+    addHeatmapSource();
+    if (firstRun == 0 ) {
+      filterMap();
+    }
+  }//end build map function
+  /*baselayer switcher see _includes/mapboxgl/baselayer-switcher.js*/
+//Need to put an improve this map here so that it gives a direct link to osm edit page
+function switchLayer(layer) {
+  console.log(layer.target);
+  console.log('getting current style')
+  var currentStyle = [map.getStyle()];
+  var str = currentStyle[0].name;
+  str = str.replace(/\s+/g, '-').toLowerCase();
+  console.log("current style: " + str);
+  var layerId = layer.target.id;
+  console.log("new style: " + layerId);
+  //check if the current style is the same as the clicked style - this means that the style name in the json must match the id of the clicked layer in the material-mapbox template
+  if (str != layerId) {
+    if (layerId == 'mapbox-satellite-streets') {
+      map.setStyle('mapbox://styles/mapbox/satellite-streets-v10');
+      //$('#attribution').append('&nbsp<a href="https://www.mapbox.com/about/maps/" target="_blank">© Mapbox</a> <a href="https://www.digitalglobe.com/" target="_blank">© DigitalGlobe</a>&nbsp;Powered by <a href="https://www.mapbox.com/mapbox-gl-js/api/" target="_blank">Mapbox GL</a>');
+    }else{
+      map.setStyle('https://tileserver.ovrdc.org/tileserver-styles/styles/' + layerId + '/style.json');
+      //$('#attribution').html('<a href="http://www.ovrdc.org/gis/">© OVRDC</a>&nbsp;<a href="http://www.openstreetmap.org/about/" target="_blank">© OpenStreetMap</a>&nbsp;Powered by <a href="https://www.mapbox.com/mapbox-gl-js/api/" target="_blank">Mapbox GL</a>');
+    }
+    /*map.on('style.load', function() {
+      if (typeof(mglSources) != "undefined") {
+        for (source in mglSources) {
+          if (!map.getSource(source)) {
+            map.addSource(source, mglSources[source]);
+          }
+        }
+      }
+      if (typeof(mglLayers) != "undefined") {
+        for (layer in mglLayers) {
+          console.log(mglLayers[layer]);
+          console.log(map.getLayoutProperty(layer, 'visibility'));
+          if (map.getLayer(layer) && map.getLayoutProperty(layer, 'visibility') != 'none') {
+            console.log('adding layer: ', layer)
+            map.addLayer(mglLayers[layer])
+          }
+        }
+      }
+      map.off('style.load');
+    });*/
+  }
+}
+/*var layerList = document.getElementById('map-baselayers--menu');
+var inputs = layerList.getElementsByClassName('baselayer');
+for (var i = 0; i < inputs.length; i++) {
+  inputs[i].onclick = switchLayer;
+}*/
+$("#map-baselayers--menu").on('click', '.baselayer', switchLayer);
+//end baselayer-switcher
+  //need to build map after switching layers to get the overlays to show back up
+  map.on('style.load', function() {
+    heatmapLayersAdded = 0;
+    console.log('map.style.load');
+    if (cploaded == 1 && firstRun == 0) {
+      buildMap();
+    }
+  });
+}
+/*
+//Heatmap via https://github.com/jvrousseau/mapboxgl-heatmap
+var heatmap;
+function msgRec(msg) {
+    var latlng = new mapboxgl.LatLng(msg.lat, msg.lng);
+    var point = map.project(latlng);
+    heatmap.addPoint(point.x, point.y, 25, 0.5);
+}
+// Add heatmap to the map
+heatmap = mapboxgl_heatmap.heatmap(map);
+//bootstrap web socket
+webSocket.on('data', msgRec);*/
+</script>
+
+
+<script>
+var w = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+console.log(w);
+if (w < 1024) {
+  sidebar = false;
+  var showSidebar = setInterval(function() {
+    console.log('checking sidebar');
+    if ($(".mdl-layout__drawer").hasClass('is-visible') && sidebar == true) {
+      clearInterval(showSidebar)
+      return false
+    }else{
+      $(".mdl-layout__drawer-button").click();
+      sidebar = true;
+    }
+  }, 500)
+}
+/*$(".map-about--card-close").click(function() {
+  $("#map-about--card").toggle();
+  $(".ovrdc-modal").fadeOut();
+});*/
+$("#map-about-btn").click(function() {
+  //$("#map-about--card").fadeIn();
+  $("#map-about-modal").fadeIn();
+});
+$("#map-share-btn").click(function() {
+  //$("#map-about--card").fadeIn();
+  $("#map-share-modal").fadeIn();
+});
+$(function() {
+  var windowUrl = window.location.href;
+  var feedbackUrl =  + windowUrl;
+  $("#map-feeback--btn-link").html('<a href="https://docs.google.com/forms/d/e/1FAIpQLSd53cAsweLYkkr75KUpN6lHpsQcKbV9XoRNtJEsFsUHdVIVuw/viewform?entry.1286129613&entry.2022340261&entry.519867356=' + feedbackUrl + '" target="_blank"><i class="material-icons">feedback</i></a>');
+});
+
+</script>
+
+<!--End Post Content-->
+<script>
+$().ready(function() {
+  setTimeout(function() {
+    $("#map-loading").hide();
+  }, 100);
+  $(".ovrdc-modal").on('click', '.ovrdc-modal--close', function() {
+    $(".ovrdc-modal").fadeOut();
+  });
+  var modalshown = localStorage.getItem('modalshown');
+  if (modalshown == null) {
+    localStorage.setItem('modalshown', 1);
+    $("#map-about-modal").fadeIn();
+  }
+  /* image save function */
+  $("#map-image-btn").click(function() {
+    var blobUrl = map.getCanvas().toDataURL();
+    var imgcard = $("#ovrdc-modal--map-info .mdl-card");
+    var background = "url('" + blobUrl +  "')";
+    $("#map-image").html('<img src="data:image/jpg;' + blobUrl + '" width="100%"></img>');
+    /*if (typeof map.getLayer('selected') != "undefined") {
+      var selfeature = map.queryRenderedFeatures({'layers':['selected']});
+      var imgname =  "map";
+      console.log(imgname)
+    }else{
+      var imgname = 'map';
+    }*/
+    var imgname = 'map';
+    $("#map-image-href").html('<a href="data:image/png;' + blobUrl + '" download="' + imgname + '.png"><i class="material-icons">file_download</i> Download Image</a>')
+    $("#map-image-modal").fadeIn();
+  });
+  /* end image save function */
+});
+</script>
+<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<!--script src="https://code.getmdl.io/1.2.1/material.min.js"></script-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+<script src="https://www.ovrdc.org/apps/assets/cssjs/spin.js"></script>
+<script src="https://www.ovrdc.org/apps/assets/cssjs/jquery-spin/jquery-spin.js"></script>
+</body>
+<script>
+/*_includes/analytics.js*/
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-63802107-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</html>
+
