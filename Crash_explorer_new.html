@@ -255,8 +255,10 @@
 		//End Popup
 		
 		//Toggle Layer
-			document.getElementById('heatmap_toggle').addEventListener('change', function(e) {
-			if ('is-checked') {
+			var heat = document.getElementsByClassName('is-checked');
+			document.getElementById('heatmap_toggle')
+			.addEventListener('change', function(e) {
+			if ('') {
 				map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'none');
 			} else {
 				map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'visible');
