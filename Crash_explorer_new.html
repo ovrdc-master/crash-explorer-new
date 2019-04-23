@@ -107,7 +107,7 @@
 			  <ul>
 				<li>
               		<label id="heatmap_toggle" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="heatmap">
-					<input type="checkbox" id="heatmap" class="mdl-switch__input" value="1"  >
+					<input type="checkbox" id="heatmap" class="mdl-switch__input" value="1" checked >
 					<span class="mdl-switch__label">Heatmap Layer</span>
              		</label>
            		</li>
@@ -179,7 +179,7 @@
         </nav>
 		  <div id="links"></div>
           <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Links</h6>
-		  	<a href="www.ovrdc.org">OVRDC Homepage</a>
+		  	<a href="www.ovrdc.org"><center>OVRDC Homepage</center></a>
       </div>
       <main>
 	<!--Mapbox Map --> 
@@ -220,6 +220,16 @@
 
 	  var feature = features[0];
 
+		console.log(features)
+
+		/*var links = document.getElementById('links');
+
+		for (let f in features) {
+			links.innerHTML += features[f].properties["CRASH_YR"]
+		}
+
+		var newtypeofcoolhtml = `<h4>${feature.properties["ODPS_LOC_ROAD_NME"]}</h4>`		*/
+
 	  var popup = new mapboxgl.Popup( { offset: [0, -15] })
 		.setLngLat(feature.geometry.coordinates)
 		.setHTML('<table class="mdl-data-table"><center><h5>Accident Details</h5></center>' +
@@ -255,15 +265,27 @@
 		//End Popup
 		
 		//Toggle Layer
-			var heat = document.getElementsByClassName('is-checked');
-			document.getElementById('heatmap_toggle')
-			.addEventListener('change', function(e) {
-			if ('') {
+            document.getElementById('heatmap_toggle')
+           .addEventListener('change', function(e) {
+            if (!e.target.checked) {
+             map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'none');
+            } else {
+               map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'visible');
+            }
+            });
+
+				/*
+			document.getElementById('heatmap_toggle', function () {
+				var heat = document.querySelector('input[type="checkbox"]');
+			
+				heat.addEventListener('change', function(e) {
+			if (heat.is-checked) {
 				map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'none');
 			} else {
 				map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'visible');
 			}
 			});
+			});*/
 		</script>
       </main>
      
