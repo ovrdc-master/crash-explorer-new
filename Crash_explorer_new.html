@@ -117,7 +117,7 @@
             <li>
               <label id="alcdrugs_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="alcdrugs">
 				<input type="checkbox" id="alcdrugs" class="mdl-switch__input" value="1"  >
-				<span class="mdl-switch__label">Alcohol/Drugs</span>
+				<span class="mdl-switch__label">Alcohol</span>
               </label>
             </li>
             <li>
@@ -209,8 +209,10 @@
 		map.getCanvas().style.cursor = 'default';
 		
 	//Popup Function
-		map.on('click', function(e) {
-	  var features = map.queryRenderedFeatures(e.point, {
+		
+		map.on('click', function (e) {
+		var bbox = [[e.point.x - 2, e.point.y - 2], [e.point.x + 2, e.point.y + 2]];
+	  	var features = map.queryRenderedFeatures(bbox, {
 		layers: ['2016-2018-crash-data']
 	  });
 
@@ -220,9 +222,9 @@
 
 	  var feature = features[0];
 
-		console.log(features)
+		/*console.log(features)
 
-		/*var links = document.getElementById('links');
+		var links = document.getElementById('links');
 
 		for (let f in features) {
 			links.innerHTML += features[f].properties["CRASH_YR"]
@@ -231,40 +233,40 @@
 		var newtypeofcoolhtml = `<h4>${feature.properties["ODPS_LOC_ROAD_NME"]}</h4>`		*/
 
 	  var popup = new mapboxgl.Popup( { offset: [0, -15] })
-		.setLngLat(feature.geometry.coordinates)
-		.setHTML('<table class="mdl-data-table"><center><h5>Accident Details</h5></center>' +
-		'<td><strong> Year of Crash </strong></td>' + 
-		'<td>' + feature.properties.CRASH_YR + '</td></tr>' +
-		'<tr><td><strong> Road </strong></td>' + '<td>' + 
-		feature.properties.ODPS_LOC_ROAD_NME + ' ' + 
-		feature.properties.ODPS_LOC_ROAD_SUFFIX_CD + ' ' + 
-		feature.properties.ODPS_LOC_ROUTE_PREFIX_CD + ' ' + 
-		feature.properties.ODPS_LOC_ROUTE_ID + '</td></tr>' + 
-		'<tr><td><strong> Light Conditions </strong></td>' + '<td>' + 
-		feature.properties.LIGHT_COND_PRIMARY_CD + '</td></tr>' + 
-		'<tr><td><strong> Crash Type </strong></td>'+ '<td>' + 
-		feature.properties.CRASH_TYPE_CD + '</td></tr>' +
-		'<tr><td><strong> Weather </strong></td>' + '<td>' + 
-		feature.properties.WEATHER_COND_CD + '</td></tr>' +
-		'<tr><td><strong> Road Conditions </strong></td>' + '<td>' + 
-		feature.properties.ROAD_COND_PRIMARY_CD + ' ' +
-		feature.properties.ROAD_COND_SECONDARY_CD + '</td></tr>' + 
-		'<tr><td><strong> Factors </strong></td>' + '<td>' + 
-		feature.properties.U1_CONT_CIR_PRIMARY_CD + '</td></tr>' + 
-		'<tr><td><strong> Vehicle Type </strong></td>' + '<td>' + 
-		feature.properties.U1_TYPE_OF_UNIT_CD + '</td></tr>' + 
-		'<tr><td><strong> Road Contour </strong></td>' + '<td>' + 
-		feature.properties.ROAD_CONTOUR_CD + '</td></tr>' + 
-		'<tr><td><strong> Serious Injuries </strong></td>' + '<td>' + 
-		feature.properties.ODPS_TOTAL_FATALITIES_NBR + '</td></tr>' +
-		'<tr><td><strong> Fatalities </strong></td>' + '<td>' + 
-		feature.properties.INCAPAC_INJURIES_NBR + '</td></tr>')
-		.setLngLat(feature.geometry.coordinates)
-		.addTo(map);
+				.setLngLat(feature.geometry.coordinates)
+				.setHTML('<table class="mdl-data-table"><center><h5>Accident Details</h5></center>' + 
+					'<td><strong> Year of Crash </strong></td>' + 
+					'<td>' + feature.properties.CRASH_YR + '</td></tr>' +
+					'<tr><td><strong> Road </strong></td>' + '<td>' + 
+					feature.properties.ODPS_LOC_ROAD_NME + ' ' + 
+					feature.properties.ODPS_LOC_ROAD_SUFFIX_CD + ' ' + 
+					feature.properties.ODPS_LOC_ROUTE_PREFIX_CD + ' ' + 
+					feature.properties.ODPS_LOC_ROUTE_ID + '</td></tr>' + 
+					'<tr><td><strong> Light Conditions </strong></td>' + '<td>' + 
+					feature.properties.LIGHT_COND_PRIMARY_CD + '</td></tr>' + 
+					'<tr><td><strong> Crash Type </strong></td>'+ '<td>' + 
+					feature.properties.CRASH_TYPE_CD + '</td></tr>' +
+					'<tr><td><strong> Weather </strong></td>' + '<td>' + 
+					feature.properties.WEATHER_COND_CD + '</td></tr>' +
+					'<tr><td><strong> Road Conditions </strong></td>' + '<td>' + 
+					feature.properties.ROAD_COND_PRIMARY_CD + ' ' +
+					feature.properties.ROAD_COND_SECONDARY_CD + '</td></tr>' + 
+					'<tr><td><strong> Factors </strong></td>' + '<td>' + 
+					feature.properties.U1_CONT_CIR_PRIMARY_CD + '</td></tr>' + 
+					'<tr><td><strong> Vehicle Type </strong></td>' + '<td>' + 
+					feature.properties.U1_TYPE_OF_UNIT_CD + '</td></tr>' + 
+					'<tr><td><strong> Road Contour </strong></td>' + '<td>' + 
+					feature.properties.ROAD_CONTOUR_CD + '</td></tr>' + 
+					'<tr><td><strong> Serious Injuries </strong></td>' + '<td>' + 
+					feature.properties.ODPS_TOTAL_FATALITIES_NBR + '</td></tr>' +
+					'<tr><td><strong> Fatalities </strong></td>' + '<td>' + 
+					feature.properties.INCAPAC_INJURIES_NBR + '</td></tr>')
+				.setLngLat(feature.geometry.coordinates)
+				.addTo(map);
 		});
 		//End Popup
 		
-		//Toggle Layer
+		//Toggle Heatmap Layer
             document.getElementById('heatmap_toggle')
            .addEventListener('change', function(e) {
             if (!e.target.checked) {
@@ -273,7 +275,46 @@
                map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'visible');
             }
             });
+		
+		//Filter Toggles Highlight	
+			map.on('load', function(e) {
+				map.addSource('2016-2018-crash-data', {
+					"type": "circle",
+					"url": "mapbox://ovrdc.4zl95g7q"
+				});
+				map.addLayer({
+					"id": "crash-highlighted",
+					"type": "circle",
+					"source": "2016-2018-crash-data",
+					"paint": {
+						"circle-color": "#ec0000",
+						"circle-opacity": 0.7
+						},
+					"filter": ["in", "ODPS_ALCOHOL_IND", ""]
+					});
+			});
+			
+		//Toggle Alchol
 
+			document.getElementById('alcdrugs_label') 
+			.addEventListener('change', function(e) {
+				if (!e.target.checked) {
+					map.on('2016-2018-crash-data', function() {
+					map.setFilter('crash-highlighted', ['in', 'ODPS_ALCOHOL_IND', '']) 
+					)};
+         } else {
+					map.on('2016-2018-crash-data', function(e) {
+						// Query the 2016-2018-crash-data layer visible in the map. Use the filter
+						// param to only collect results that share the same crash type name.
+						var alcholcrashes = map.querySourceFeatures('2016-2018-crash-data', {
+						filter: ['in', 'ODPS_ALCOHOL_IND', feature.properties.ODPS_ALCOHOL_IND]
+						});
+						
+						// Add features that share the same crash type name to the highlight layer.
+						map.setFilter('crash-highlighted', ['in', 'ODPS_ALCOHOL_IND', feature.properties.ODPS_ALCOHOL_IND]);
+						})
+				 })
+			}); 	
 				/*
 			document.getElementById('heatmap_toggle', function () {
 				var heat = document.querySelector('input[type="checkbox"]');
