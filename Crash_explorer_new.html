@@ -201,7 +201,7 @@
 		mapboxgl.accessToken = 'pk.eyJ1Ijoib3ZyZGMiLCJhIjoiY2pjbTA2cmY3MG9naTJ3cndpYmJtbXRnNCJ9.CuHfwEKEsk2PqUJ_qFgrOQ';
 		var map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/ovrdc/cjtytvaao42id1fo57k9fbb3p',
+		style: 'mapbox://styles/ovrdc/cjv5nhgec0bur1fn0abl3z2pc',
 		center: [-83.0, 39.0],
 		zoom: 8.1
 		});
@@ -276,7 +276,7 @@
             }
             });
 		
-		//Filter Toggles Highlight	
+		/*Filter Toggles Highlight	
 			map.on('load', function(e) {
 				map.addSource('2016-2018-crash-data', {
 					type: 'circle',
@@ -293,23 +293,23 @@
 						'circle-color': '#ec0000',
 						'circle-opacity': 0.7
 						},
-					'filter': ['==', 'ODPS_ALCOHOL_IND', '']
+					'filter': ['==', 'ODPS_ALCOHOL_IND', 'Yes']
 					});
-			});
-			
-			/*map.on('load', function(e) {
-				map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
 			});*/
+			
+			map.on('load', function(e) {
+				map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
+			});
 
 		//Toggle Alcohol
 			document.getElementById('alcdrugs') 
 			.addEventListener('change', function(e) {
 				if (!e.target.checked) {
-					//map.setLayoutProperty('crash-highlighted', 'visibility', 'none');
-					map.setFilter('crash-highlighted'['==', 'ODPS_ALCOHOL_IND', '']);
+					map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
+					map.setFilter('2016-2018-crash-data-highlight'['==', 'ODPS_ALCOHOL_IND', '']);
          } else {
-					//map.setLayoutProperty('crash-highlighted', 'visibility', 'visible');
-					map.setFilter('crash-highlighted'['==', 'ODPS_ALCOHOL_IND', 'Yes']);
+					map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible');
+					map.setFilter('2016-2018-crash-data-highlight'['==', 'ODPS_ALCOHOL_IND', 'Yes']);
 				 }
 			});
 
