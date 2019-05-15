@@ -106,9 +106,9 @@
 			<h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Map Layers</h6>
 			  <ul>
 				<li>
-              		<label id="heatmap_toggle" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="heatmap">
-					<input type="checkbox" id="heatmap" class="mdl-switch__input" value="1" checked >
-					<span class="mdl-switch__label">Heatmap Layer</span>
+              <label id="heatmap_toggle" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="heatmap">
+								<input type="checkbox" id="heatmap" class="mdl-switch__input" value="1" checked >
+								<span class="mdl-switch__label">Heatmap Layer</span>
              		</label>
            		</li>
 			  </ul>
@@ -116,8 +116,8 @@
           <ul>
             <li>
               <label id="alcdrugs_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="alcdrugs">
-				<input type="checkbox" id="alcdrugs" class="mdl-switch__input" value="1"  >
-				<span class="mdl-switch__label">Alcohol</span>
+								<input type="checkbox" id="alcdrugs" class="mdl-switch__input" value="1"  >
+								<span class="mdl-switch__label">Alcohol</span>
               </label>
             </li>
             <li>
@@ -157,9 +157,9 @@
               </label>
             </li>
             <li>
-			  <label id="teen_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="teen">
-				<input type="checkbox" id="teen" class="mdl-switch__input" value="1"  >
-				<span class="mdl-switch__label">Teen Involved</span>
+							<label id="teen_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="teen">
+								<input type="checkbox" id="teen" class="mdl-switch__input" value="1"  >
+								<span class="mdl-switch__label">Teen Involved</span>
               </label>
             </li>
             <li>
@@ -267,54 +267,52 @@
 		//End Popup
 		
 		//Toggle Heatmap Layer
-            document.getElementById('heatmap_toggle')
+            document.getElementById('heatmap')
            .addEventListener('change', function(e) {
             if (!e.target.checked) {
-             map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'none');
+              map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'none');
             } else {
-               map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'visible');
+              map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'visible');
             }
             });
 		
 		//Filter Toggles Highlight	
 			map.on('load', function(e) {
 				map.addSource('2016-2018-crash-data', {
-					"type": "circle",
-					"url": "mapbox://ovrdc.4zl95g7q"
+					type: 'circle',
+					url: 'mapbox://ovrdc.4zl95g7q'
 				});
 				map.addLayer({
-					"id": "crash-highlighted",
-					"type": "circle",
-					"source": "2016-2018-crash-data",
-					"paint": {
-						"circle-color": "#ec0000",
-						"circle-opacity": 0.7
+					'id': 'crash-highlighted',
+					'type': 'circle',
+					'source': '2016-2018-crash-data',
+					'layout': {
+						'visibility': 'none'
+					},
+					'paint': {
+						'circle-color': '#ec0000',
+						'circle-opacity': 0.7
 						},
-					"filter": ["in", "ODPS_ALCOHOL_IND", ""]
+					'filter': ['==', 'ODPS_ALCOHOL_IND', '']
 					});
 			});
 			
-		//Toggle Alchol
+			/*map.on('load', function(e) {
+				map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
+			});*/
 
-			document.getElementById('alcdrugs_label') 
+		//Toggle Alcohol
+			document.getElementById('alcdrugs') 
 			.addEventListener('change', function(e) {
 				if (!e.target.checked) {
-					map.on('2016-2018-crash-data', function() {
-					map.setFilter('crash-highlighted', ['in', 'ODPS_ALCOHOL_IND', '']) 
-					)};
+					//map.setLayoutProperty('crash-highlighted', 'visibility', 'none');
+					map.setFilter('crash-highlighted'['==', 'ODPS_ALCOHOL_IND', '']);
          } else {
-					map.on('2016-2018-crash-data', function(e) {
-						// Query the 2016-2018-crash-data layer visible in the map. Use the filter
-						// param to only collect results that share the same crash type name.
-						var alcholcrashes = map.querySourceFeatures('2016-2018-crash-data', {
-						filter: ['in', 'ODPS_ALCOHOL_IND', feature.properties.ODPS_ALCOHOL_IND]
-						});
-						
-						// Add features that share the same crash type name to the highlight layer.
-						map.setFilter('crash-highlighted', ['in', 'ODPS_ALCOHOL_IND', feature.properties.ODPS_ALCOHOL_IND]);
-						})
-				 })
-			}); 	
+					//map.setLayoutProperty('crash-highlighted', 'visibility', 'visible');
+					map.setFilter('crash-highlighted'['==', 'ODPS_ALCOHOL_IND', 'Yes']);
+				 }
+			});
+
 				/*
 			document.getElementById('heatmap_toggle', function () {
 				var heat = document.querySelector('input[type="checkbox"]');
