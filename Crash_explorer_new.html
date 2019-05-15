@@ -299,7 +299,6 @@
 			
 			map.on('load', function(e) {
 				map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
-				var alcohol = 2016-2018-crash-data-highlight.feature.properties.ODPS_ALCHOL_IND['Yes'];
 			});
 
 		//Toggle Alcohol
@@ -307,11 +306,12 @@
 			.addEventListener('change', function(e) {
 				if (!e.target.checked) {
 					map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
+					map.setFilter('2016-2018-crash-data-highlight'['==', 'ODPS_ALCOHOL_IND', '']);
          } else {
 					map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible');
-					map.setFilter('2016-2018-crash-data-highlight'['all', 'alcohol']);
+					map.setFilter('2016-2018-crash-data-highlight'['==', 'ODPS_ALCOHOL_IND', 'Yes']);
 				 }
-			}); 	
+			});
 
 				/*
 			document.getElementById('heatmap_toggle', function () {
