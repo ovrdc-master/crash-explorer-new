@@ -201,7 +201,7 @@
 		mapboxgl.accessToken = 'pk.eyJ1Ijoib3ZyZGMiLCJhIjoiY2pjbTA2cmY3MG9naTJ3cndpYmJtbXRnNCJ9.CuHfwEKEsk2PqUJ_qFgrOQ';
 		var map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/ovrdc/cjv5nhgec0bur1fn0abl3z2pc',
+		style: 'mapbox://styles/ovrdc/cjtytvaao42id1fo57k9fbb3p',
 		center: [-83.0, 39.0],
 		zoom: 8.1
 		});
@@ -276,7 +276,7 @@
             }
             });
 		
-		/*Filter Toggles Highlight	
+		//Filter Toggles Highlight	
 			map.on('load', function(e) {
 				map.addSource('2016-2018-crash-data', {
 					type: 'circle',
@@ -293,38 +293,25 @@
 						'circle-color': '#ec0000',
 						'circle-opacity': 0.7
 						},
-					'filter': ['==', 'ODPS_ALCOHOL_IND', 'Yes']
+					'filter': ['==', 'ODPS_ALCOHOL_IND', '']
 					});
-			});*/
-			
-			map.on('load', function(e) {
-				map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
 			});
+			
+			/*map.on('load', function(e) {
+				map.setLayoutProperty('crash-highlighted', 'visibility', 'none');
+			});*/
 
 		//Toggle Alcohol
 			document.getElementById('alcdrugs') 
 			.addEventListener('change', function(e) {
 				if (!e.target.checked) {
-					map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
-					map.setFilter('2016-2018-crash-data-highlight'['==', 'ODPS_ALCOHOL_IND', '']);
+					map.setFilter('crash-highlighted'['==', 'ODPS_ALCOHOL_IND', '']);
          } else {
-					map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible');
-					map.setFilter('2016-2018-crash-data-highlight'['==', 'ODPS_ALCOHOL_IND', 'Yes']);
+					map.setFilter('crash-highlighted'['==', 'ODPS_ALCOHOL_IND', 'Yes']);
 				 }
 			});
 
-				/*
-			document.getElementById('heatmap_toggle', function () {
-				var heat = document.querySelector('input[type="checkbox"]');
-			
-				heat.addEventListener('change', function(e) {
-			if (heat.is-checked) {
-				map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'none');
-			} else {
-				map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'visible');
-			}
-			});
-			});*/
+
 		</script>
       </main>
      
