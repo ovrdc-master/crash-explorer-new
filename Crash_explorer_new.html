@@ -260,6 +260,17 @@
           });
           var feature = features[0];
           console.log(features)
+
+          /*if (feature.length > 1) {
+            document.getElementById('pd').innerHTML = 
+            "<p><em>Name: " + neighborhood[0].properties.Name +
+            "<p><em>Name: " + neighborhood[0].properties.Description +
+            "</em></p>";
+          } else {
+            document.getElementById('pd').innerHTML = '<p>Hover over a Neighborhood</p>';
+          }*/
+ 
+
           var popup = new mapboxgl.Popup({
               offset: [0, -15]
             })
@@ -324,7 +335,18 @@
               map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODPS_ALCOHOL_IND', 'Yes']);
             }
           });
-
+        //Toggle Animal
+        document.getElementById('animal')
+          .addEventListener('change', function (e) {
+            console.log('changed') //NOTES working
+            if (!e.target.checked) {
+              console.log("not checked")//NOTES working
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', 'Animal']);
+            }
+          });
       </script>
     </main>
 
