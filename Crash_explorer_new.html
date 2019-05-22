@@ -258,17 +258,21 @@
           var features = map.queryRenderedFeatures(bbox, {
             layers: ['2016-2018-crash-data']
           });
-          var feature = features[0];
+          var feature = features[];
           console.log(features)
-
           if (feature.length > 1) {
-            
+            var message = "<span style='color:firebrick;'>Multiple (" + feature.length + ") crashes found</span>";
+            var buttons = '<button id="prev" style="float:left;display:block;" class="mdl-button mdl-js-button mdl-button--primary">Previous</button><button id="next" style="float:right;display:block;" class="mdl-button mdl-js-button mdl-button--primary">Next</button></div>';
+          } else {
+            var message = "";
+            var buttons = "";
+          };
             var popup = new mapboxgl.Popup({
-              offset: [0, -15]
+              offset: [0, 7]
             })
             .setLngLat(feature.geometry.coordinates)
             .setHTML(
-              '<table class="mdl-data-table"><center><h5>Accident Details</h5></center>' +
+              '<table id="popup_content" class="mdl-data-table"><center><h5>Accident Details</h5></center>' +
               '<td><strong> Year of Crash </strong></td>' +
               '<td>' + feature.properties.CRASH_YR + '</td></tr>' +
               '<tr><td><strong> Road </strong></td>' + '<td>' +
@@ -295,44 +299,9 @@
               feature.properties.ODPS_TOTAL_FATALITIES_NBR + '</td></tr>' +
               '<tr><td><strong> Fatalities </strong></td>' + '<td>' +
               feature.properties.INCAPAC_INJURIES_NBR + '</td></tr>')
-            .setLngLat(feature.geometry.coordinates)
+            $("popup_content").append(message)
+            $("popup_content").append(buttons)
             .addTo(map);
-          } else {         
-            var popup = new mapboxgl.Popup({
-              offset: [0, -15]
-            })
-            .setLngLat(feature.geometry.coordinates)
-            .setHTML(
-              '<table class="mdl-data-table"><center><h5>Accident Details</h5></center>' +
-              '<td><strong> Year of Crash </strong></td>' +
-              '<td>' + feature.properties.CRASH_YR + '</td></tr>' +
-              '<tr><td><strong> Road </strong></td>' + '<td>' +
-              feature.properties.ODPS_LOC_ROAD_NME + ' ' +
-              feature.properties.ODPS_LOC_ROAD_SUFFIX_CD + ' ' +
-              feature.properties.ODPS_LOC_ROUTE_PREFIX_CD + ' ' +
-              feature.properties.ODPS_LOC_ROUTE_ID + '</td></tr>' +
-              '<tr><td><strong> Light Conditions </strong></td>' + '<td>' +
-              feature.properties.LIGHT_COND_PRIMARY_CD + '</td></tr>' +
-              '<tr><td><strong> Crash Type </strong></td>' + '<td>' +
-              feature.properties.CRASH_TYPE_CD + '</td></tr>' +
-              '<tr><td><strong> Weather </strong></td>' + '<td>' +
-              feature.properties.WEATHER_COND_CD + '</td></tr>' +
-              '<tr><td><strong> Road Conditions </strong></td>' + '<td>' +
-              feature.properties.ROAD_COND_PRIMARY_CD + ' ' +
-              feature.properties.ROAD_COND_SECONDARY_CD + '</td></tr>' +
-              '<tr><td><strong> Factors </strong></td>' + '<td>' +
-              feature.properties.U1_CONT_CIR_PRIMARY_CD + '</td></tr>' +
-              '<tr><td><strong> Vehicle Type </strong></td>' + '<td>' +
-              feature.properties.U1_TYPE_OF_UNIT_CD + '</td></tr>' +
-              '<tr><td><strong> Road Contour </strong></td>' + '<td>' +
-              feature.properties.ROAD_CONTOUR_CD + '</td></tr>' +
-              '<tr><td><strong> Serious Injuries </strong></td>' + '<td>' +
-              feature.properties.ODPS_TOTAL_FATALITIES_NBR + '</td></tr>' +
-              '<tr><td><strong> Fatalities </strong></td>' + '<td>' +
-              feature.properties.INCAPAC_INJURIES_NBR + '</td></tr>')
-            .setLngLat(feature.geometry.coordinates)
-            .addTo(map);
-          }
         });
         //End Popup
 
