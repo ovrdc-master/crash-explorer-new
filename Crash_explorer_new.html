@@ -135,6 +135,15 @@
             </label>
           </li>
         </ul>
+        <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Crash Years</h6>
+        <ul>
+          <li>
+            <label id="2016-2018_toggle"
+              class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="2016-2018">
+              <input type="checkbox" id="2016-2018" class="mdl-switch__input" value="1" checked>
+              <span class="mdl-switch__label">2016-2018 Crashes</span>
+            </label>
+          </li>
         <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Map Filters</h6>
         <ul>
           <li>
@@ -149,6 +158,13 @@
               for="animal">
               <input type="checkbox" id="animal" class="mdl-switch__input" value="1">
               <span class="mdl-switch__label">Animal Involved</span>
+            </label>
+          </li>
+          <li>
+            <label id="distracted_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect"
+              for="distracted">
+              <input type="checkbox" id="distracted" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Distracted Driver</span>
             </label>
           </li>
           <li>
@@ -198,13 +214,6 @@
               for="allinj">
               <input type="checkbox" id="allinj" class="mdl-switch__input" value="1">
               <span class="mdl-switch__label">All Injury Crashes</span>
-            </label>
-          </li>
-          <li>
-            <label id="fatinc_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect"
-              for="fatinc">
-              <input type="checkbox" id="fatinc" class="mdl-switch__input" value="1">
-              <span class="mdl-switch__label">Serious/Fatal Injury</span>
             </label>
           </li>
         </ul>
@@ -258,7 +267,7 @@
           var features = map.queryRenderedFeatures(bbox, {
             layers: ['2016-2018-crash-data']
           });
-          var feature = features[];
+          var feature = features[0];
           console.log(features)
           if (feature.length > 1) {
             var message = "<span style='color:firebrick;'>Multiple (" + feature.length + ") crashes found</span>";
@@ -299,10 +308,11 @@
               feature.properties.ODPS_TOTAL_FATALITIES_NBR + '</td></tr>' +
               '<tr><td><strong> Fatalities </strong></td>' + '<td>' +
               feature.properties.INCAPAC_INJURIES_NBR + '</td></tr>')
-            $("popup_content").append(message)
-            $("popup_content").append(buttons)
+            //$("#mdl-data-table").append(message);
+            //$("#mdl-data-table").append(buttons);
             .addTo(map);
         });
+        console.log
         //End Popup
 
         //Toggle Heatmap Layer
@@ -344,6 +354,87 @@
               map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', 'Animal']);
             }
           });
+        //Toggle Intersections
+        document.getElementById('intersec')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODOT_CRASH_LOCATION_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['in', 'ODOT_CRASH_LOCATION_CD', 'Four-Way Intersection', 'T-Intersection', 'Y-Intersection', 'Traffic Circle/Roundabout', '5 Or More Point Intersection']);
+            }
+          });
+
+        //Toggle local Roads
+        document.getElementById('locowned')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'MAINTENANCE_AUTHORITY_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['in', 'MAINTENANCE_AUTHORITY_CD', 'Town or Township Highway Agency', 'County Highway Agency', 'City or Municipal Highway Agency']);
+            }
+          });
+        //Toggle Pedestrians
+        document.getElementById('bikeped')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', 'Pedestrian']);
+            }
+          });
+        //Toggle Roadway Departure
+        document.getElementById('rwdepart')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'FHWA_RDWY_DEPARTURE_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'FHWA_RDWY_DEPARTURE_IND', 'Yes']);
+            }
+          });
+        //Toggle Speeding
+        document.getElementById('ovrspeed')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODPS_SPEED_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODPS_SPEED_IND', 'Yes']);
+            }
+          });        
+        //Toggle Teen Involved
+        document.getElementById('teen')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODOT_YOUNG_DRIVER_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODOT_YOUNG_DRIVER_IND', 'Yes']);
+            }
+          });
+        //Toggle All Injury
+        document.getElementById('allinj')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'SEVERITY_BY_TYPE_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['in', 'SEVERITY_BY_TYPE_CD', 'Visible Injury', 'Serious Injury', 'Fatal Injury']);
+            }
+          }); 
+        //Toggle distracted Driving
+        document.getElementById('distracted')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'DISTRACTED_DRIVER_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'DISTRACTED_DRIVER_IND', 'Yes']);
+            }
+          }); 
       </script>
     </main>
 
