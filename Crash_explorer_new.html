@@ -16,73 +16,96 @@
   limitations under the License
 -->
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,user-scalable=no">
-	<title>OVRDC Vehicle Crash Explorer</title>
-		<!-- Meta data for Twitter and Open Graph -->
-		  <meta name="twitter:card" content="summary">
-		  <meta name="twitter:site" content="@ovrdc">
-		  <meta name="twitter:creator" content="@ovrdc">
-		  <meta name="twitter:title" content="OVRDC Vehicle Crash Explorer">
-		  <meta name="twitter:description" content="Crashes in the OVRDC Region from 2013-2019">
-		  <meta name="twitter:domain" content="www.ovrdc.org" />
-		  <meta name="twitter:image" content="https://www.ovrdc.org/apps/assets/post-images/large/accident-explorer.png" />
-	  <!--Open Graph meta data-->
-		  <meta property="og:title" content="OVRDC Vehicle Crash Explorer" />
-		  <meta property="og:type" content="website" />
-		  <meta property="og:site_name" content="" />
-		  <meta property="og:image" content="https://www.ovrdc.org/apps/assets/post-images/landscape/accident-explorer.png" />
-		  <meta property="og:image:width" content="1200" />
-		  <meta property="og:image:height" content="627" />
-		  <meta property="og:image" content="https://www.ovrdc.org/apps/assets/post-images/large/accident-explorer.png" />
-		  <meta property="og:image:width" content="1200" />
-		  <meta property="og:image:height" content="1200" />
-		  <meta property="og:description" content="Crashes in the OVRDC Region from 2013-2019" />
-		  <meta property="og:url" content="https://www.ovrdc.org/apps/" />
-	  <!--end meta and open graph-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,user-scalable=no">
+  <title>OVRDC Vehicle Crash Explorer</title>
+  <!-- Meta data for Twitter and Open Graph -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@ovrdc">
+  <meta name="twitter:creator" content="@ovrdc">
+  <meta name="twitter:title" content="OVRDC Vehicle Crash Explorer">
+  <meta name="twitter:description" content="Crashes in the OVRDC Region from 2013-2019">
+  <meta name="twitter:domain" content="www.ovrdc.org" />
+  <meta name="twitter:image" content="https://www.ovrdc.org/apps/assets/post-images/large/accident-explorer.png" />
+  <!--Open Graph meta data-->
+  <meta property="og:title" content="OVRDC Vehicle Crash Explorer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="" />
+  <meta property="og:image" content="https://www.ovrdc.org/apps/assets/post-images/landscape/accident-explorer.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image" content="https://www.ovrdc.org/apps/assets/post-images/large/accident-explorer.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1200" />
+  <meta property="og:description" content="Crashes in the OVRDC Region from 2013-2019" />
+  <meta property="og:url" content="https://www.ovrdc.org/apps/" />
+  <!--end meta and open graph-->
 
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="file:///H|/Website/Templates/images/android-desktop.png">
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="file:///H|/Website/Templates/images/android-desktop.png">
 
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="OVRDC Vehicle Crash Explorer">
-    <link rel="apple-touch-icon-precomposed" href="file:///H|/Website/Templates/images/ios-desktop.png">
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="OVRDC Vehicle Crash Explorer">
+  <link rel="apple-touch-icon-precomposed" href="file:///H|/Website/Templates/images/ios-desktop.png">
 
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="file:///H|/Website/Templates/images/favicon.png">
-	  
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
+  <link rel="shortcut icon" href="file:///H|/Website/Templates/images/favicon.png">
+
+  <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+  <!--
     <link rel="canonical" href="http://www.example.com/">
     -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link href="material.min.css" rel="stylesheet" type="text/css">
-	<!--Mapbox API -->
-	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
-	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" rel="stylesheet" />
-    <style>
- 	body { margin:0; padding:0; }
-	#map { position:fixed; top:0; bottom:0;height:100%;width:100%; }
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="F:\Website\Crash Explorer(Rebuit from Scratch)/Crash Explorer.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="material.min.css" rel="stylesheet" type="text/css">
+  <!--Mapbox API -->
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+    }
+    ul {
+      list-style: none;
+      padding: 0 1rem;
+    }
+    /*NOTES get rid of the list bullets and border */
+    .demo-drawer {
+      border: none;
+    }
     </style>
 </head>
-  <body>
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-      <!--<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+
+<body>
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <!--<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
       </header> -->
-      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-        <header class="demo-drawer-header">
-		 <div id="map-title"><h4><center>OVRDC Vehicle Crash Explorer</center></h4></div>
-          <!--
+    <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+      <header class="demo-drawer-header">
+        <div id="map-title">
+          <h4 style="text-align:center;">OVRDC Vehicle Crash Explorer</h4><!--NOTES center is deprecated i think, use style="text-align:center;" see https://www.w3schools.com/tags/tag_center.asp-->
+        </div>
+        <!--
 		  <div class="demo-avatar-dropdown">
             <span class="mdl-color-text--grey-600">OVRDC Web Links</span>
             <div class="mdl-layout-spacer"></div>
@@ -99,234 +122,332 @@
             </ul>
           </div>
            -->
-        </header>
-		  <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-			<!--map control filters-->
-          <div id="map-controls--data"></div>
-			<h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Map Layers</h6>
-			  <ul>
-				<li>
-              <label id="heatmap_toggle" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="heatmap">
-								<input type="checkbox" id="heatmap" class="mdl-switch__input" value="1" checked >
-								<span class="mdl-switch__label">Heatmap Layer</span>
-             		</label>
-           		</li>
-			  </ul>
-         <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Map Filters</h6>
-          <ul>
-            <li>
-              <label id="alcdrugs_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="alcdrugs">
-								<input type="checkbox" id="alcdrugs" class="mdl-switch__input" value="1"  >
-								<span class="mdl-switch__label">Alcohol</span>
-              </label>
-            </li>
-            <li>
-              <label id="animal_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="animal">
-                <input type="checkbox" id="animal" class="mdl-switch__input" value="1"  >
-                <span class="mdl-switch__label">Animal Involved</span>
-              </label>
-            </li>
-            <li>
-              <label id="intersec_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="intersec">
-              	<input type="checkbox" id="intersec" class="mdl-switch__input" value="1"  >
-              	<span class="mdl-switch__label">Intersections</span>
-              </label>
-            </li>
-            <li>
-              <label id="locowned_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="locowned">
-                <input type="checkbox" id="locowned" class="mdl-switch__input" value="1"  >
-                <span class="mdl-switch__label">Locally Owned Rds</span>
-              </label>
-            </li>
-            <li>
-              <label id="bikeped_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="bikeped">
-                <input type="checkbox" id="bikeped" class="mdl-switch__input" value="1"  >
-                <span class="mdl-switch__label">Pedestrian Involved</span>
-              </label>
-            </li>
-            <li>
-              <label id="rwdepart_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="rwdepart">
-                <input type="checkbox" id="rwdepart" class="mdl-switch__input" value="1"  >
-                <span class="mdl-switch__label">Roadway Departure</span>
-              </label>
-            </li>
-            <li>
-              <label id="ovrspeed_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="ovrspeed">
-                <input type="checkbox" id="ovrspeed" class="mdl-switch__input" value="1"  >
-                <span class="mdl-switch__label">Speeding</span>
-              </label>
-            </li>
-            <li>
-							<label id="teen_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="teen">
-								<input type="checkbox" id="teen" class="mdl-switch__input" value="1"  >
-								<span class="mdl-switch__label">Teen Involved</span>
-              </label>
-            </li>
-            <li>
-			  <label id="allinj_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="allinj">
-				<input type="checkbox" id="allinj" class="mdl-switch__input" value="1"  >
-				<span class="mdl-switch__label">All Injury Crashes</span>
-              </label>
-            </li>
-            <li>
-				<label id="fatinc_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="fatinc">
-				<input type="checkbox" id="fatinc" class="mdl-switch__input" value="1"  >
-				<span class="mdl-switch__label">Serious/Fatal Injury</span>
-              	</label>
-            </li>
-		 </ul>
- 			<!--end map filters-->
-        </nav>
-		  <div id="links"></div>
-          <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Links</h6>
-		  	<a href="www.ovrdc.org"><center>OVRDC Homepage</center></a>
-      </div>
-      <main>
-	<!--Mapbox Map --> 
-		 
-		<style>
+      </header>
+      <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+        <!--map control filters-->
+        <div id="map-controls--data"></div>
+        <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Map Layers</h6>
+        <ul>
+          <li>
+            <label id="heatmap_toggle"
+              class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="heatmap">
+              <input type="checkbox" id="heatmap" class="mdl-switch__input" value="1" checked>
+              <span class="mdl-switch__label">Heatmap Layer</span>
+            </label>
+          </li>
+        </ul>
+        <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Crash Years</h6>
+        <ul>
+          <li>
+            <label id="2016-2018_toggle"
+              class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="2016-2018">
+              <input type="checkbox" id="2016-2018" class="mdl-switch__input" value="1" checked>
+              <span class="mdl-switch__label">2016-2018 Crashes</span>
+            </label>
+          </li>
+        <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Map Filters</h6>
+        <ul>
+          <li>
+            <label id="alcdrugs_label"
+              class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="alcdrugs">
+              <input type="checkbox" id="alcdrugs" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Alcohol</span>
+            </label>
+          </li>
+          <li>
+            <label id="animal_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect"
+              for="animal">
+              <input type="checkbox" id="animal" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Animal Involved</span>
+            </label>
+          </li>
+          <li>
+            <label id="distracted_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect"
+              for="distracted">
+              <input type="checkbox" id="distracted" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Distracted Driver</span>
+            </label>
+          </li>
+          <li>
+            <label id="intersec_label"
+              class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="intersec">
+              <input type="checkbox" id="intersec" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Intersections</span>
+            </label>
+          </li>
+          <li>
+            <label id="locowned_label"
+              class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="locowned">
+              <input type="checkbox" id="locowned" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Locally Owned Rds</span>
+            </label>
+          </li>
+          <li>
+            <label id="bikeped_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect"
+              for="bikeped">
+              <input type="checkbox" id="bikeped" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Pedestrian Involved</span>
+            </label>
+          </li>
+          <li>
+            <label id="rwdepart_label"
+              class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="rwdepart">
+              <input type="checkbox" id="rwdepart" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Roadway Departure</span>
+            </label>
+          </li>
+          <li>
+            <label id="ovrspeed_label"
+              class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect" for="ovrspeed">
+              <input type="checkbox" id="ovrspeed" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Speeding</span>
+            </label>
+          </li>
+          <li>
+            <label id="teen_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect"
+              for="teen">
+              <input type="checkbox" id="teen" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">Teen Involved</span>
+            </label>
+          </li>
+          <li>
+            <label id="allinj_label" class="map-controls--filters-toggle mdl-switch mdl-js-switch mdl-js-ripple-effect"
+              for="allinj">
+              <input type="checkbox" id="allinj" class="mdl-switch__input" value="1">
+              <span class="mdl-switch__label">All Injury Crashes</span>
+            </label>
+          </li>
+        </ul>
+        <!--end map filters-->
+      </nav>
+      <div id="links"></div>
+      <h6 class="mdl-color-text--primary mdl-typography--text-center mdl-typography--text-uppercase">Links</h6>
+      <a href="www.ovrdc.org">
+        <center>OVRDC Homepage</center>
+      </a>
+    </div>
+    <main>
+      <!--Mapbox Map -->
+
+      <style>
         .mapboxgl-popup-content tr {
-          	min-width:400;
-			line-height: 7%;
-        }	
-		.mapboxgl-popup-content tr {
-          	max-height:60;
-			line-height: 7%;
+          min-width: 400;
+          line-height: 7%;
         }
-		
-		</style>
-		
-		<div id="map"></div>
-		<script>
-		mapboxgl.accessToken = 'pk.eyJ1Ijoib3ZyZGMiLCJhIjoiY2pjbTA2cmY3MG9naTJ3cndpYmJtbXRnNCJ9.CuHfwEKEsk2PqUJ_qFgrOQ';
-		var map = new mapboxgl.Map({
-		container: 'map',
-		style: 'mapbox://styles/ovrdc/cjtytvaao42id1fo57k9fbb3p',
-		center: [-83.0, 39.0],
-		zoom: 8.1
-		});
-	//End Mapbox Map
-		map.getCanvas().style.cursor = 'default';
-		
-	//Popup Function
-		
-		map.on('click', function (e) {
-		var bbox = [[e.point.x - 2, e.point.y - 2], [e.point.x + 2, e.point.y + 2]];
-	  	var features = map.queryRenderedFeatures(bbox, {
-		layers: ['2016-2018-crash-data']
-	  });
 
-	  if (!features.length) {
-		return;
-	  }
+        .mapboxgl-popup-content tr {
+          max-height: 60;
+          line-height: 7%;
+        }
+      </style>
 
-	  var feature = features[0];
+      <div id="map"></div>
+      <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoib3ZyZGMiLCJhIjoiY2pjbTA2cmY3MG9naTJ3cndpYmJtbXRnNCJ9.CuHfwEKEsk2PqUJ_qFgrOQ';
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/ovrdc/cjv5nhgec0bur1fn0abl3z2pc',
+          center: [-83.0, 39.0],
+          zoom: 8.1,
+          hash: true /* NOTES i added the hash so it would reload where i left off */
+        });
+        //End Mapbox Map
+        map.getCanvas().style.cursor = 'default';
 
-		/*console.log(features)
+        //Popup Function
+              /*var links = document.getElementById('links');
+              for (let f in features) {
+                links.innerHTML += features[f].properties["CRASH_YR"]
+              }
+              var newtypeofcoolhtml = `<h4>${feature.properties["ODPS_LOC_ROAD_NME"]}</h4>`		*/
+        map.on('click', function (e) {
+          var bbox = [
+            [e.point.x - 2, e.point.y - 2],
+            [e.point.x + 2, e.point.y + 2]
+          ];
+          var features = map.queryRenderedFeatures(bbox, {
+            layers: ['2016-2018-crash-data']
+          });
+          var feature = features[0];
+          console.log(features)
+          if (feature.length > 1) {
+            var message = "<span style='color:firebrick;'>Multiple (" + feature.length + ") crashes found</span>";
+            var buttons = '<button id="prev" style="float:left;display:block;" class="mdl-button mdl-js-button mdl-button--primary">Previous</button><button id="next" style="float:right;display:block;" class="mdl-button mdl-js-button mdl-button--primary">Next</button></div>';
+          } else {
+            var message = "";
+            var buttons = "";
+          };
+          var html = "";
+          for (var f in features) {
+            var feature = features[f];
+            html += '<table id="popup_content" class="mdl-data-table"><center><h5>Accident Details</h5></center>' +
+              '<td><strong> Year of Crash </strong></td>' +
+              '<td>' + feature.properties.CRASH_YR + '</td></tr>' +
+              '<tr><td><strong> Road </strong></td>' + '<td>' +
+              feature.properties.ODPS_LOC_ROAD_NME + ' ' +
+              feature.properties.ODPS_LOC_ROAD_SUFFIX_CD + ' ' +
+              feature.properties.ODPS_LOC_ROUTE_PREFIX_CD + ' ' +
+              feature.properties.ODPS_LOC_ROUTE_ID + '</td></tr>' +
+              '<tr><td><strong> Light Conditions </strong></td>' + '<td>' +
+              feature.properties.LIGHT_COND_PRIMARY_CD + '</td></tr>' +
+              '<tr><td><strong> Crash Type </strong></td>' + '<td>' +
+              feature.properties.CRASH_TYPE_CD + '</td></tr>' +
+              '<tr><td><strong> Weather </strong></td>' + '<td>' +
+              feature.properties.WEATHER_COND_CD + '</td></tr>' +
+              '<tr><td><strong> Road Conditions </strong></td>' + '<td>' +
+              feature.properties.ROAD_COND_PRIMARY_CD + ' ' +
+              feature.properties.ROAD_COND_SECONDARY_CD + '</td></tr>' +
+              '<tr><td><strong> Factors </strong></td>' + '<td>' +
+              feature.properties.U1_CONT_CIR_PRIMARY_CD + '</td></tr>' +
+              '<tr><td><strong> Vehicle Type </strong></td>' + '<td>' +
+              feature.properties.U1_TYPE_OF_UNIT_CD + '</td></tr>' +
+              '<tr><td><strong> Road Contour </strong></td>' + '<td>' +
+              feature.properties.ROAD_CONTOUR_CD + '</td></tr>' +
+              '<tr><td><strong> Serious Injuries </strong></td>' + '<td>' +
+              feature.properties.ODPS_TOTAL_FATALITIES_NBR + '</td></tr>' +
+              '<tr><td><strong> Fatalities </strong></td>' + '<td>' +
+              feature.properties.INCAPAC_INJURIES_NBR + '</td></tr>';
+          }
+            var popup = new mapboxgl.Popup({
+              offset: [0, 7]
+            })
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(message + html + buttons)
+            .addTo(map);
+            $("#mdl-data-table").append(message)
+            $("#mdl-data-table").append(buttons)
 
-		var links = document.getElementById('links');
+        });
+        console.log
+        //End Popup
 
-		for (let f in features) {
-			links.innerHTML += features[f].properties["CRASH_YR"]
-		}
-
-		var newtypeofcoolhtml = `<h4>${feature.properties["ODPS_LOC_ROAD_NME"]}</h4>`		*/
-
-	  var popup = new mapboxgl.Popup( { offset: [0, -15] })
-				.setLngLat(feature.geometry.coordinates)
-				.setHTML('<table class="mdl-data-table"><center><h5>Accident Details</h5></center>' + 
-					'<td><strong> Year of Crash </strong></td>' + 
-					'<td>' + feature.properties.CRASH_YR + '</td></tr>' +
-					'<tr><td><strong> Road </strong></td>' + '<td>' + 
-					feature.properties.ODPS_LOC_ROAD_NME + ' ' + 
-					feature.properties.ODPS_LOC_ROAD_SUFFIX_CD + ' ' + 
-					feature.properties.ODPS_LOC_ROUTE_PREFIX_CD + ' ' + 
-					feature.properties.ODPS_LOC_ROUTE_ID + '</td></tr>' + 
-					'<tr><td><strong> Light Conditions </strong></td>' + '<td>' + 
-					feature.properties.LIGHT_COND_PRIMARY_CD + '</td></tr>' + 
-					'<tr><td><strong> Crash Type </strong></td>'+ '<td>' + 
-					feature.properties.CRASH_TYPE_CD + '</td></tr>' +
-					'<tr><td><strong> Weather </strong></td>' + '<td>' + 
-					feature.properties.WEATHER_COND_CD + '</td></tr>' +
-					'<tr><td><strong> Road Conditions </strong></td>' + '<td>' + 
-					feature.properties.ROAD_COND_PRIMARY_CD + ' ' +
-					feature.properties.ROAD_COND_SECONDARY_CD + '</td></tr>' + 
-					'<tr><td><strong> Factors </strong></td>' + '<td>' + 
-					feature.properties.U1_CONT_CIR_PRIMARY_CD + '</td></tr>' + 
-					'<tr><td><strong> Vehicle Type </strong></td>' + '<td>' + 
-					feature.properties.U1_TYPE_OF_UNIT_CD + '</td></tr>' + 
-					'<tr><td><strong> Road Contour </strong></td>' + '<td>' + 
-					feature.properties.ROAD_CONTOUR_CD + '</td></tr>' + 
-					'<tr><td><strong> Serious Injuries </strong></td>' + '<td>' + 
-					feature.properties.ODPS_TOTAL_FATALITIES_NBR + '</td></tr>' +
-					'<tr><td><strong> Fatalities </strong></td>' + '<td>' + 
-					feature.properties.INCAPAC_INJURIES_NBR + '</td></tr>')
-				.setLngLat(feature.geometry.coordinates)
-				.addTo(map);
-		});
-		//End Popup
-		
-		//Toggle Heatmap Layer
-            document.getElementById('heatmap')
-           .addEventListener('change', function(e) {
+        //Toggle Heatmap Layer
+        document.getElementById('heatmap')
+          .addEventListener('change', function (e) {
             if (!e.target.checked) {
               map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'none');
             } else {
               map.setLayoutProperty('2016-2018 Crash Data Heatmap', 'visibility', 'visible');
             }
-            });
-		
-		//Filter Toggles Highlight	
-			map.on('load', function(e) {
-				map.addSource('2016-2018-crash-data', {
-					type: 'circle',
-					url: 'mapbox://ovrdc.4zl95g7q'
-				});
-				map.addLayer({
-					'id': 'crash-highlighted',
-					'type': 'circle',
-					'source': '2016-2018-crash-data',
-					'layout': {
-						'visibility': 'none'
-					},
-					'paint': {
-						'circle-color': '#ec0000',
-						'circle-opacity': 0.7
-						},
-					'filter': ['==', 'ODPS_ALCOHOL_IND', '']
-					});
-			});
-			
-			/*map.on('load', function(e) {
-				map.setLayoutProperty('crash-highlighted', 'visibility', 'none');
-			});*/
-
-		//Toggle Alcohol
-			document.getElementById('alcdrugs') 
-			.addEventListener('change', function(e) {
-				if (!e.target.checked) {
-					map.setFilter('crash-highlighted'['==', 'ODPS_ALCOHOL_IND', '']);
-         } else {
-					map.setFilter('crash-highlighted'['==', 'ODPS_ALCOHOL_IND', 'Yes']);
-				 }
-			});
+          });
 
 
-		</script>
-      </main>
-     
-      <!-- Attribution
+        map.on('load', function (e) {
+          map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'none');
+        });
+
+        //Toggle Alcohol
+        document.getElementById('alcdrugs')
+          .addEventListener('change', function (e) {
+            console.log('changed') //NOTES working
+            if (!e.target.checked) {
+              console.log("not checked")//NOTES working
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODPS_ALCOHOL_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODPS_ALCOHOL_IND', 'Yes']);
+            }
+          });
+        //Toggle Animal
+        document.getElementById('animal')
+          .addEventListener('change', function (e) {
+            console.log('changed') //NOTES working
+            if (!e.target.checked) {
+              console.log("not checked")//NOTES working
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', 'Animal']);
+            }
+          });
+        //Toggle Intersections
+        document.getElementById('intersec')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODOT_CRASH_LOCATION_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['in', 'ODOT_CRASH_LOCATION_CD', 'Four-Way Intersection', 'T-Intersection', 'Y-Intersection', 'Traffic Circle/Roundabout', '5 Or More Point Intersection']);
+            }
+          });
+
+        //Toggle local Roads
+        document.getElementById('locowned')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'MAINTENANCE_AUTHORITY_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['in', 'MAINTENANCE_AUTHORITY_CD', 'Town or Township Highway Agency', 'County Highway Agency', 'City or Municipal Highway Agency']);
+            }
+          });
+        //Toggle Pedestrians
+        document.getElementById('bikeped')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'CRASH_TYPE_CD', 'Pedestrian']);
+            }
+          });
+        //Toggle Roadway Departure
+        document.getElementById('rwdepart')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'FHWA_RDWY_DEPARTURE_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'FHWA_RDWY_DEPARTURE_IND', 'Yes']);
+            }
+          });
+        //Toggle Speeding
+        document.getElementById('ovrspeed')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODPS_SPEED_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODPS_SPEED_IND', 'Yes']);
+            }
+          });        
+        //Toggle Teen Involved
+        document.getElementById('teen')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODOT_YOUNG_DRIVER_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'ODOT_YOUNG_DRIVER_IND', 'Yes']);
+            }
+          });
+        //Toggle All Injury
+        document.getElementById('allinj')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'SEVERITY_BY_TYPE_CD', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['in', 'SEVERITY_BY_TYPE_CD', 'Visible Injury', 'Serious Injury', 'Fatal Injury']);
+            }
+          }); 
+        //Toggle distracted Driving
+        document.getElementById('distracted')
+          .addEventListener('change', function (e) {
+            if (!e.target.checked) {
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'DISTRACTED_DRIVER_IND', '']);
+            } else {
+              map.setLayoutProperty('2016-2018-crash-data-highlight', 'visibility', 'visible'); //NOTES the layer has to be visible to be filtered - that's why just keep it visible always
+              map.setFilter('2016-2018-crash-data-highlight', ['==', 'DISTRACTED_DRIVER_IND', 'Yes']);
+            }
+          }); 
+      </script>
+    </main>
+
+    <!-- Attribution
 		<a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/dashboard/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a>
 		-->
-	<script>
-		/*_includes/analytics.js*/
-		(function(i,s,o,g,r,a,m)`	{i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-63802107-1', 'auto');
-		ga('send', 'pageview');
-	</script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  </body>
+</body>
+
 </html>
