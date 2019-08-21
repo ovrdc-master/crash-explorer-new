@@ -66,6 +66,7 @@
     <link rel="canonical" href="http://www.example.com/">
     -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="F:\Website\Crash Explorer(Rebuit from Scratch)/Crash Explorer.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link href="material.min.css" rel="stylesheet" type="text/css">
   <!--Mapbox API -->
@@ -267,7 +268,26 @@
           var features = map.queryRenderedFeatures(bbox, {
             layers: ['2016-2018-crash-data']
           });
-          var feature = features[0];
+
+          var counter = 0;
+
+          //INITIALIZE POPUP ON PAGELOAD TO SIMULATE A CLICKED POINT AND THE POPUP INFO FOR FEATURE 0
+          populateHTML(0)
+
+          document.body.addEventListener('click', function(p) {
+            if(p.target.id === "next") {
+              counter = (counter === features.length -1 ) ? counter : counter + 1;
+              populateHTML(counter)
+              return
+            } 
+            if (p.target.id === "prev") {
+              counter = (counter === 0) ? 0 : counter - 1;
+              populateHTML(counter)
+              return
+            }
+          })
+
+          /*var feature = features[0];
           console.log(features)
           if (feature.length > 1) {
             var message = "<span style='color:firebrick;'>Multiple (" + feature.length + ") crashes found</span>";
@@ -275,11 +295,12 @@
           } else {
             var message = "";
             var buttons = "";
-          };
-          var html = "";
+          };*/
+          function populateHTML(p) {
+          innerHTML = "";
           for (var f in features) {
             var feature = features[f];
-            html += '<table id="popup_content" class="mdl-data-table"><center><h5>Accident Details</h5></center>' +
+            innerHTML += '<div id="popup"></div><table id="popup_content" class="mdl-data-table"><center><h5>Accident Details</h5></center>' +
               '<td><strong> Year of Crash </strong></td>' +
               '<td>' + feature.properties.CRASH_YR + '</td></tr>' +
               '<tr><td><strong> Road </strong></td>' + '<td>' +
@@ -305,16 +326,18 @@
               '<tr><td><strong> Serious Injuries </strong></td>' + '<td>' +
               feature.properties.ODPS_TOTAL_FATALITIES_NBR + '</td></tr>' +
               '<tr><td><strong> Fatalities </strong></td>' + '<td>' +
-              feature.properties.INCAPAC_INJURIES_NBR + '</td></tr>';
+              feature.properties.INCAPAC_INJURIES_NBR + '</td></tr></table>'<button id="prev">Previous</button> <button id="next">Next</button>;
           }
+        }
             var popup = new mapboxgl.Popup({
               offset: [0, 7]
             })
+
+            
             .setLngLat(feature.geometry.coordinates)
             .setHTML(message + html + buttons)
             .addTo(map);
-            $("#mdl-data-table").append(message)
-            $("#mdl-data-table").append(buttons)
+
 
         });
         console.log
